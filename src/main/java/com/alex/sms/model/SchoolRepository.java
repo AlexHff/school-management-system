@@ -1,4 +1,4 @@
-package model;
+package com.alex.sms.model;
 
 import org.springframework.data.repository.CrudRepository;
 

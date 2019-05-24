@@ -1,4 +1,4 @@
-package controller;
+package com.alex.sms.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import model.School;
-import model.SchoolRepository;
+import com.alex.sms.model.School;
+import com.alex.sms.model.SchoolRepository;
 
 @Controller
 @RequestMapping(path="/school")
