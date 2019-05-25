@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alex.sms.exception.SchoolNotFoundException;
 import com.alex.sms.model.School;
-import com.alex.sms.model.SchoolRepository;
+import com.alex.sms.repository.SchoolRepository;
 
 @Controller
 @RequestMapping(path="/school")
 public class SchoolController {
 	@Autowired
 	private SchoolRepository schoolRepository;
+	
+	@GetMapping("")
+    public String school() {
+        return "school";
+    }
 	
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<School> getAllSchools() {
@@ -36,8 +41,8 @@ public class SchoolController {
 	@GetMapping(path="/{id}")
 	public @ResponseBody School getSchool (@PathVariable(value = "id") Integer id)
 			throws SchoolNotFoundException {
-		School s = schoolRepository.findById(id).orElseThrow(() ->
-			new SchoolNotFoundException(id));
+		School s = schoolRepository.findById(id)
+				.orElseThrow(() -> new SchoolNotFoundException(id));
 		return s;
 	}
 	
