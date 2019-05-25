@@ -23,10 +23,11 @@ public class SchoolController {
 	@Autowired
 	private SchoolRepository schoolRepository;
 	
-	@GetMapping("")
-    public String schoolForm(Model model) {
+	@GetMapping("/dashboard")
+    public String schoolIndex(Model model) {
         model.addAttribute("school", new School());
-        return "school";
+        model.addAttribute("schools", schoolRepository.findAll());
+        return "school/dashboard";
     }
 	
 	@GetMapping(path="/all")
@@ -45,7 +46,7 @@ public class SchoolController {
     @PostMapping("/create")
     public String schoolSubmit(@ModelAttribute School s) {
 		schoolRepository.save(s);
-        return "result";
+        return "redirect:dashboard";
     }
 	
 	@PutMapping("/{id}")
@@ -64,6 +65,6 @@ public class SchoolController {
 		School s = schoolRepository.findById(id)
 				.orElseThrow(() -> new SchoolNotFoundException(id));
 		schoolRepository.delete(s);
-		return "Deleted";
+		return "redirect:dashboard";
 	}
 }
