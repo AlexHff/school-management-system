@@ -44,7 +44,7 @@ public class SchoolController {
 	}
 
     @PostMapping("/create")
-    public String schoolSubmit(@ModelAttribute School s) {
+    public String createSchool(@ModelAttribute School s) {
 		schoolRepository.save(s);
         return "redirect:dashboard";
     }
@@ -59,12 +59,9 @@ public class SchoolController {
 		return "Updated";
     }
 	
-	@DeleteMapping(path="/{id}")
-	public @ResponseBody String deleteSchool (@PathVariable(value = "id") Integer id)
-			throws SchoolNotFoundException {
-		School s = schoolRepository.findById(id)
-				.orElseThrow(() -> new SchoolNotFoundException(id));
+	@DeleteMapping("/delete")
+    public String schoolDelete(@ModelAttribute School s) {
 		schoolRepository.delete(s);
-		return "redirect:dashboard";
-	}
+        return "redirect:dashboard";
+    }
 }
