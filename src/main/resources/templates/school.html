@@ -1,11 +1,15 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Wenger Systems</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <p>this is the school</p>
+	<h1>Add new school</h1>
+	<form action="#" th:action="@{/school/create}" th:object="${school}" method="post">
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
 </body>
 </html>
