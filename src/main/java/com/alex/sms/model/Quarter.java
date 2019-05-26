@@ -19,6 +19,7 @@ public class Quarter {
 	private Date endDate;
 	
 	@ManyToOne
+	@JoinColumn
 	private SchoolYear schoolYear;
 
 	/**
