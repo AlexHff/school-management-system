@@ -45,6 +45,7 @@ public class SchoolController {
 
     @PostMapping("/create")
     public String createSchool(@ModelAttribute School s) {
+    	System.out.println(s.getId() + " " + s.getName());
 		schoolRepository.save(s);
         return "redirect:dashboard";
     }

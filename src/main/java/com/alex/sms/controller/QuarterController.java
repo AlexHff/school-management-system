@@ -19,12 +19,15 @@ public class QuarterController {
 	private QuarterRepository quarterRepository;
 	
 	@GetMapping(path="/create")
-	public @ResponseBody String createQuarter (@RequestParam Integer number
-			, @RequestParam SchoolYear schoolYear) throws SchoolYearNotFoundException {
-
+	public @ResponseBody String createQuarter (@RequestParam Integer number,
+			@RequestParam Integer schoolYearId) throws SchoolYearNotFoundException {
+		SchoolYearController s = new SchoolYearController();
+		System.out.println(s.toString());
+		SchoolYear schoolYear = s.getSchoolYear(schoolYearId);
 		Quarter q = new Quarter();
 		q.setNumber(number);
 		q.setSchoolYear(schoolYear);
+		System.out.println(q.getNumber() + " " + q.getSchoolYear());
 		quarterRepository.save(q);
 		return "Saved";
 	}

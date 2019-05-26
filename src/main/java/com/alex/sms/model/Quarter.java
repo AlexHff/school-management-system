@@ -18,8 +18,8 @@ public class Quarter {
 	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	
-	@ManyToOne
-	@JoinColumn
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "school_year_id")
 	private SchoolYear schoolYear;
 
 	/**
