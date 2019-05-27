@@ -20,7 +20,8 @@ public class SchoolYearController {
 	
 	@GetMapping(path="/create")
 	public @ResponseBody String createSchoolYear (@RequestParam Integer id) {
-	SchoolYear s = new SchoolYear(id);
+	SchoolYear s = new SchoolYear();
+	s.setId(id);
 	schoolYearRepository.save(s);
 	return "Saved";
 	}

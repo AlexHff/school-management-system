@@ -11,6 +11,7 @@ import com.alex.sms.exception.SchoolYearNotFoundException;
 import com.alex.sms.model.Quarter;
 import com.alex.sms.model.SchoolYear;
 import com.alex.sms.repository.QuarterRepository;
+import com.alex.sms.repository.SchoolYearRepository;
 
 @Controller
 @RequestMapping(path="/quarter")
@@ -18,12 +19,15 @@ public class QuarterController {
 	@Autowired
 	private QuarterRepository quarterRepository;
 	
+	@Autowired
+	private SchoolYearRepository schoolYearRepository;
+	
 	@GetMapping(path="/create")
 	public @ResponseBody String createQuarter (@RequestParam Integer number,
 			@RequestParam Integer schoolYearId) throws SchoolYearNotFoundException {
-		SchoolYearController s = new SchoolYearController();
-		System.out.println(s.toString());
-		SchoolYear schoolYear = s.getSchoolYear(schoolYearId);
+		SchoolYear schoolYear = new SchoolYear();
+		schoolYear.setId(schoolYearId);
+		schoolYearRepository.save(schoolYear);
 		Quarter q = new Quarter();
 		q.setNumber(number);
 		q.setSchoolYear(schoolYear);
