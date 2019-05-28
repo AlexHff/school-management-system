@@ -14,6 +14,7 @@
 	            <th>Id</th>
 	            <th>Name</th>
 	            <th></th>
+	            <th></th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -23,6 +24,7 @@
 	        <tr th:each="school : ${schools}">
 	            <td><span th:text="${school.id}">id</span></td>
 	            <td><a th:href="${school.id}"><span th:text="${school.name}">name</span></a></td>
+	            <td><a th:href="@{{id}/edit(id=${school.id})}"><button type="button">Edit</button></a></td>
 	            <td>
 	            	<form action="#" th:object="${school}" th:action="@{/school/delete}" th:method="delete">
 	            		<input type="hidden" id="school" name="school" th:value="${school.id}">

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alex.sms.exception.SchoolNotFoundException;
@@ -55,15 +54,26 @@ public class SchoolController {
 		}
         return "redirect:dashboard";
     }
+    
+    @GetMapping(path="/{id}/edit")
+	public String viewUpdateFormSchool(@PathVariable(value = "id") Integer id,
+			Model model) throws SchoolNotFoundException {
+    	model.addAttribute("school", this.getSchool(id));
+		return "school/edit";
+	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/{id}/update")
     public String updateSchool(@PathVariable(value = "id") Integer id,
-    		@RequestParam String name) throws SchoolNotFoundException {
-		School s = schoolRepository.findById(id)
-				.orElseThrow(() -> new SchoolNotFoundException(id));
-		s.setName(name);
-		schoolRepository.save(s);
-		return "Updated";
+    		@ModelAttribute School s) {
+		try {
+			School school = this.getSchool(s.getId());
+			school.setName(s.getName());
+			schoolRepository.save(school);
+			System.out.println(school.getId() + " " + school.getName());
+		} catch (SchoolNotFoundException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/school/dashboard";
     }
 	
 	@DeleteMapping("/delete")
