@@ -63,16 +63,8 @@ public class SchoolController {
 	}
 	
 	@PutMapping("/{id}/update")
-    public String updateSchool(@PathVariable(value = "id") Integer id,
-    		@ModelAttribute School s) {
-		try {
-			School school = this.getSchool(s.getId());
-			school.setName(s.getName());
-			schoolRepository.save(school);
-			System.out.println(school.getId() + " " + school.getName());
-		} catch (SchoolNotFoundException e) {
-			e.printStackTrace();
-		}
+    public String updateSchool(@ModelAttribute School s) {
+		schoolRepository.save(s);
 		return "redirect:/school/dashboard";
     }
 	
