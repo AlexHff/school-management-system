@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Quarter dashboard</h1>
+	<h3>All quarters</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Number</th>
+	            <th>Start date</th>
+	            <th>End date</th>
+	            <th>School year</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${quarters.empty}">
+	            <td colspan="2">No Quarters Available</td>
+	        </tr>
+	        <tr th:each="quarter : ${quarters}">
+	            <td><span th:text="${quarter.id}">id</span></td>
+	            <td><a th:href="${quarter.id}"><span th:text="${quarter.number}">number</span></a></td>
+	            <td><span th:text="${quarter.startDate}">start_date</span></td>
+	            <td><span th:text="${quarter.endDate}">end_date</span></td>
+	            <td><span th:text="${quarter.schoolYear.id}">school_year_id</span></td>
+	            <td><a th:href="@{{id}/edit(id=${quarter.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${quarter}" th:action="@{/school/delete}" th:method="delete">
+	            		<input type="hidden" id="quarter" name="quarter" th:value="${quarter.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new quarter</h3>
+	<form action="#" th:object="${quarter}" th:action="@{/quarter/create}" method="post">
+        <p>Number: <input type="number" th:field="*{number}"/></p>
+        <p>Start date: <input type="date" th:field="*{startDate}"/></p>
+        <p>End date: <input type="date" th:field="*{endDate}"/></p>
+        <p>School year: <input type="number" th:field="*{schoolYear.id}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>

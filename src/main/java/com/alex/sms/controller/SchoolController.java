@@ -45,6 +45,7 @@ public class SchoolController {
     @PostMapping("/create")
     public String createSchool(@ModelAttribute School s) {
 		schoolRepository.save(s);
+		// TODO Remove after test //
 		try {
 			School school = new School();
 			school = this.getSchool(s.getId());
@@ -52,6 +53,7 @@ public class SchoolController {
 		} catch (SchoolNotFoundException e) {
 			e.printStackTrace();
 		}
+		////
         return "redirect:dashboard";
     }
     
