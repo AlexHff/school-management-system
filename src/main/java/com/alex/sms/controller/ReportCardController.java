@@ -12,71 +12,70 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alex.sms.exception.ReportCardDetailNotFoundException;
+import com.alex.sms.exception.ReportCardNotFoundException;
 import com.alex.sms.model.ReportCard;
-import com.alex.sms.model.ReportCardDetail;
-import com.alex.sms.repository.ReportCardDetailRepository;
+import com.alex.sms.repository.QuarterRepository;
+import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.ReportCardRepository;
-import com.alex.sms.repository.TeachingRepository;
 
 @Controller
-@RequestMapping(path="/report_card_detail")
+@RequestMapping(path="/report_card")
 public class ReportCardController {
-	@Autowired
-	private ReportCardDetailRepository reportCardDetailRepository;
-	
 	@Autowired
 	private ReportCardRepository reportCardRepository;
 	
 	@Autowired
-	private TeachingRepository teachingRepository;
+	private RegistrationRepository registrationRepository;
+	
+	@Autowired
+	private QuarterRepository quarterRepository;
 	
 	@GetMapping("/dashboard")
-    public String reportCardDetailIndex(Model model) {
-        model.addAttribute("reportCardDetail", new ReportCardDetail());
-        model.addAttribute("reportCardDetails", reportCardDetailRepository.findAll());
+    public String reportCardIndex(Model model) {
+        model.addAttribute("reportCard", new ReportCard());
         model.addAttribute("reportCards", reportCardRepository.findAll());
-        model.addAttribute("teachings", teachingRepository.findAll());
-        return "report_card_detail/dashboard";
+        model.addAttribute("registrations", registrationRepository.findAll());
+        model.addAttribute("quarters", quarterRepository.findAll());
+        return "report_card/dashboard";
     }
 	
 	@GetMapping(path="/{id}")
-	public @ResponseBody ReportCardDetail getReportCardDetail (@PathVariable(value = "id") Integer id)
-			throws ReportCardDetailNotFoundException {
-		ReportCardDetail s = reportCardDetailRepository.findById(id)
-				.orElseThrow(() -> new ReportCardDetailNotFoundException());
+	public @ResponseBody ReportCard getReportCard (@PathVariable(value = "id") Integer id)
+			throws ReportCardNotFoundException {
+		ReportCard s = reportCardRepository.findById(id)
+				.orElseThrow(() -> new ReportCardNotFoundException());
 		return s;
 	}
 	
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<ReportCard> getAllReportCardDetails() {
+	public @ResponseBody Iterable<ReportCard> getAllReportCards() {
 		return reportCardRepository.findAll();
 	}
 
     @PostMapping("/create")
-    public String createReportCardDetail(@ModelAttribute ReportCardDetail s) {
-		reportCardDetailRepository.save(s);
-        return "redirect:/report_card_detail/dashboard";
+    public String createReportCard(@ModelAttribute ReportCard s) {
+		reportCardRepository.save(s);
+        return "redirect:/report_card/dashboard";
     }
     
     @GetMapping(path="/{id}/edit")
-	public String viewUpdateFormReportCardDetail(@PathVariable(value = "id") Integer id,
-			Model model) throws ReportCardDetailNotFoundException {
-    	model.addAttribute("reportCardDetail", this.getReportCardDetail(id));
-        model.addAttribute("reportCards", reportCardRepository.findAll());
-        model.addAttribute("teachings", teachingRepository.findAll());
-		return "report_card_detail/edit";
+	public String viewUpdateFormReportCard(@PathVariable(value = "id") Integer id,
+			Model model) throws ReportCardNotFoundException {
+    	model.addAttribute("reportCard", this.getReportCard(id));
+        model.addAttribute("registrations", registrationRepository.findAll());
+        model.addAttribute("quarters", quarterRepository.findAll());
+		return "report_card/edit";
 	}
 	
 	@PutMapping("/{id}/update")
-    public String updateReportCardDetail(@ModelAttribute ReportCardDetail s) {
-		reportCardDetailRepository.save(s);
-		return "redirect:/report_card_detail/dashboard";
+    public String updateReportCard(@ModelAttribute ReportCard s) {
+		reportCardRepository.save(s);
+		return "redirect:/report_card/dashboard";
     }
 	
 	@DeleteMapping("/delete")
-    public String deleteReportCardDetail(@ModelAttribute ReportCardDetail s) {
-		reportCardDetailRepository.delete(s);
-        return "redirect:/report_card_detail/dashboard";
+    public String deleteReportCard(@ModelAttribute ReportCard s) {
+		reportCardRepository.delete(s);
+        return "redirect:/report_card/dashboard";
     }
 }

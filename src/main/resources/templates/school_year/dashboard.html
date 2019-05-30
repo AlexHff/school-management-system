@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>School year dashboard</h1>
+	<h3>All schoolYears</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Year</th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${schoolYears.empty}">
+	            <td colspan="2">No Levels Available</td>
+	        </tr>
+	        <tr th:each="schoolYear : ${schoolYears}">
+	            <td><span th:text="${schoolYear.id}">id</span></td>
+	            <td>
+	            	<form action="#" th:object="${schoolYear}" th:action="@{/schoolYear/delete}" th:method="delete">
+	            		<input type="hidden" id="schoolYear" name="schoolYear" th:value="${schoolYear.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new schoolYear</h3>
+	<form action="#" th:object="${schoolYear}" th:action="@{/school_year/create}" method="post">
+        <p>School year: <input type="number" th:field="*{id}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>
