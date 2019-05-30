@@ -67,6 +67,9 @@ public class ClassController {
 	public String viewUpdateFormClass(@PathVariable(value = "id") Integer id,
 			Model model) throws ClassNotFoundException {
     	model.addAttribute("class", this.getClass(id));
+        model.addAttribute("schools", schoolRepository.findAll());
+        model.addAttribute("levels", levelRepository.findAll());
+        model.addAttribute("schoolYears", schoolYearRepository.findAll());
 		return "class/edit";
 	}
 	

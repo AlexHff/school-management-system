@@ -2,16 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Wenger systems</title>
 </head>
 <body>
-	<h3>Edit school</h3>
-	<form action="#" th:object="${quarter}" th:action="@{update}" th:method="put">
-        <p>Number: <input type="number" th:field="*{number}"/></p>
-        <p>Start date: <input type="date" th:field="*{startDate}"/></p>
-        <p>End date: <input type="date" th:field="*{endDate}"/></p>
-        <p>School year: <input type="number" th:field="*{schoolYear.id}"/></p>
-        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+	<h3>Edit class</h3>
+	<form action="#" th:object="${class}" th:action="@{update}" th:method="put">
+        <p>Name: <input type="text" th:field="*{name}"/></p>
+        <p>School:
+	        <select th:field="*{school.id}" id="school" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a school</option>
+			    <option th:each="school : ${schools}" th:value="${school.id}" th:text="${school.name}"></option>
+			</select>
+		</p>
+		<p>Level:
+	        <select th:field="*{level.id}" id="level" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a level</option>
+			    <option th:each="level : ${levels}" th:value="${level.id}" th:text="${level.name}"></option>
+			</select>
+		</p>
+        <p>School year:
+	        <select th:field="*{schoolYear.id}" id="schoolYear" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a school year</option>
+			    <option th:each="schoolYear : ${schoolYears}" th:value="${schoolYear.id}" th:text="${schoolYear.id}"></option>
+			</select>
+		</p>
+        <p><input type="submit" value="Submit"/></p>
     </form>
 </body>
 </html>
