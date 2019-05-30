@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Report Card dashboard</h1>
+	<h3>All reportCardDetails</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Quarter num</th>
+	            <th>Registration id</th>
+	            <th>Appreciation</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${reportCardDetails.empty}">
+	            <td colspan="2">No Report Cards Available</td>
+	        </tr>
+	        <tr th:each="reportCardDetail : ${reportCardDetails}">
+	            <td><span th:text="${reportCardDetail.id}">id</span></td>
+	            <td><span th:text="${reportCardDetail.reportCard.id}">reportCard</span></td>
+	            <td><span th:text="${reportCardDetail.teaching.id}">number</span></td>
+	            <td><span th:text="${reportCardDetail.appreciation}">appreciation</span></td>
+	            <td><a th:href="@{{id}/edit(id=${reportCardDetail.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${reportCardDetail}" th:action="@{/report_card_detail/delete}" th:method="delete">
+	            		<input type="hidden" id="reportCardDetail" name="reportCardDetail" th:value="${reportCardDetail.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new report card</h3>
+	<form action="#" th:object="${reportCardDetail}" th:action="@{/report_card_detail/create}" method="post">
+        <p>Report card:
+	        <select th:field="*{reportCard.id}" id="reportCard" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a reportCard</option>
+			    <option th:each="reportCard : ${reportCards}" th:value="${reportCard.id}" th:text="${reportCard.id}"></option>
+			</select>
+		</p>
+        <p>Registration:
+	        <select th:field="*{teaching.id}" id="c" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a teaching</option>
+			    <option th:each="teaching : ${teachings}" th:value="${teaching.id}" th:text="${teaching.id}"></option>
+			</select>
+		</p>
+		<p>Appreciation: <input type="text" th:field="*{appreciation}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>

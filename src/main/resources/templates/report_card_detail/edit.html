@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>Edit school</h3>
+	<form action="#" th:object="${reportCardDetail}" th:action="@{update}" th:method="put">
+        <p>Report card:
+	        <select th:field="*{reportCard.id}" id="reportCard" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a reportCard</option>
+			    <option th:each="reportCard : ${reportCards}" th:value="${reportCard.id}" th:text="${reportCard.id}"></option>
+			</select>
+		</p>
+        <p>Registration:
+	        <select th:field="*{teaching.id}" id="c" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a teaching</option>
+			    <option th:each="teaching : ${teachings}" th:value="${teaching.id}" th:text="${teaching.id}"></option>
+			</select>
+		</p>
+		<p>Appreciation: <input type="text" th:field="*{appreciation}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+</html>

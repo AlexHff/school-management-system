@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Teaching dashboard</h1>
+	<h3>All teachings</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Class</th>
+	            <th>Subject</th>
+	            <th>Teacher</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${teachings.empty}">
+	            <td colspan="2">No Teachings Available</td>
+	        </tr>
+	        <tr th:each="teaching : ${teachings}">
+	            <td><span th:text="${teaching.id}">id</span></td>
+	            <td><span th:text="${teaching.c.name}">class</span></td>
+	            <td><span th:text="${teaching.subject.name}">subject</span></td>
+	            <td><span th:text="${teaching.teacher.name}">teacher</span></td>
+	            <td><a th:href="@{{id}/edit(id=${teaching.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${teaching}" th:action="@{/teaching/delete}" th:method="delete">
+	            		<input type="hidden" id="teaching" name="teaching" th:value="${teaching.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new teaching</h3>
+	<form action="#" th:object="${teaching}" th:action="@{/teaching/create}" method="post">
+        <p>Class:
+	        <select th:field="*{c.id}" id="c" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a class</option>
+			    <option th:each="class : ${classes}" th:value="${class.id}" th:text="${class.name}"></option>
+			</select>
+		</p>
+		<p>Subject:
+	        <select th:field="*{subject.id}" id="subject" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a subject</option>
+			    <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+			</select>
+		</p>
+        <p>Teacher:
+	        <select th:field="*{teacher.id}" id="teacher" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a teacher</option>
+			    <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.name}"></option>
+			</select>
+		</p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>

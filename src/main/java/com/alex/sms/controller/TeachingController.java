@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alex.sms.exception.TeachingNotFoundException;
 import com.alex.sms.model.Teaching;
+import com.alex.sms.repository.ClassRepository;
 import com.alex.sms.repository.SubjectRepository;
 import com.alex.sms.repository.TeachingRepository;
 import com.alex.sms.repository.TeacherRepository;
@@ -30,10 +31,14 @@ public class TeachingController {
 	@Autowired
 	private TeacherRepository teacherRepository;
 	
+	@Autowired
+	private ClassRepository classRepository;
+	
 	@GetMapping("/dashboard")
     public String teachingIndex(Model model) {
         model.addAttribute("teaching", new Teaching());
         model.addAttribute("teachings", teachingRepository.findAll());
+        model.addAttribute("classes", classRepository.findAll());
         model.addAttribute("teachers", teacherRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
         return "teaching/dashboard";
@@ -62,6 +67,8 @@ public class TeachingController {
 	public String viewUpdateFormTeaching(@PathVariable(value = "id") Integer id,
 			Model model) throws TeachingNotFoundException {
     	model.addAttribute("teaching", this.getTeaching(id));
+        model.addAttribute("teachings", teachingRepository.findAll());
+        model.addAttribute("classes", classRepository.findAll());
         model.addAttribute("teachers", teacherRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
 		return "teaching/edit";

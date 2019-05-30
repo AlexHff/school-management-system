@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Wenger systems</title>
+</head>
+<body>
+	<h3>Edit class</h3>
+	<form action="#" th:object="${teaching}" th:action="@{update}" th:method="put">
+        <p>Class:
+	        <select th:field="*{c.id}" id="c" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a class</option>
+			    <option th:each="class : ${classes}" th:value="${class.id}" th:text="${class.name}"></option>
+			</select>
+		</p>
+		<p>Subject:
+	        <select th:field="*{subject.id}" id="subject" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a subject</option>
+			    <option th:each="subject : ${subjects}" th:value="${subject.id}" th:text="${subject.name}"></option>
+			</select>
+		</p>
+        <p>Teacher:
+	        <select th:field="*{teacher.id}" id="teacher" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a teacher</option>
+			    <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.name}"></option>
+			</select>
+		</p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+</html>
