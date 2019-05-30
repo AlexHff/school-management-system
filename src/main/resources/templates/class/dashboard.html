@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Class dashboard</h1>
+	<h3>All classes</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Name</th>
+	            <th>Level</th>
+	            <th>School</th>
+	            <th>School year</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${classes.empty}">
+	            <td colspan="2">No Classes Available</td>
+	        </tr>
+	        <tr th:each="class : ${classes}">
+	            <td><span th:text="${class.id}">id</span></td>
+	            <td><a th:href="${class.id}"><span th:text="${class.name}">name</span></a></td>
+	            <td><span th:text="${class.level.name}">start_date</span></td>
+	            <td><span th:text="${class.school.name}">end_date</span></td>
+	            <td><span th:text="${class.schoolYear.id}">school_year_id</span></td>
+	            <td><a th:href="@{{id}/edit(id=${class.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${class}" th:action="@{/class/delete}" th:method="delete">
+	            		<input type="hidden" id="class" name="class" th:value="${class.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new class</h3>
+	<form action="#" th:object="${class}" th:action="@{/class/create}" method="post">
+        <p>Name: <input type="text" th:field="*{name}"/></p>
+        <p>School:
+	        <select th:field="*{school.id}" id="school" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a school</option>
+			    <option th:each="school : ${schools}" th:value="${school.id}" th:text="${school.name}"></option>
+			</select>
+		</p>
+		<p>Level:
+	        <select th:field="*{level.id}" id="level" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a level</option>
+			    <option th:each="level : ${levels}" th:value="${level.id}" th:text="${level.name}"></option>
+			</select>
+		</p>
+        <p>School year:
+	        <select th:field="*{schoolYear.id}" id="schoolYear" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a school year</option>
+			    <option th:each="schoolYear : ${schoolYears}" th:value="${schoolYear.id}" th:text="${schoolYear.id}"></option>
+			</select>
+		</p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>

@@ -45,15 +45,6 @@ public class LevelController {
     @PostMapping("/create")
     public String createLevel(@ModelAttribute Level s) {
 		levelRepository.save(s);
-		// TODO Remove after test //
-		try {
-			Level level = new Level();
-			level = this.getLevel(s.getId());
-			System.out.println(level.getId());
-		} catch (LevelNotFoundException e) {
-			e.printStackTrace();
-		}
-		////
         return "redirect:dashboard";
     }
     
