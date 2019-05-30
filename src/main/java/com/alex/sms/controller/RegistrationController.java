@@ -64,6 +64,7 @@ public class RegistrationController {
 			Model model) throws RegistrationNotFoundException {
     	model.addAttribute("registration", this.getRegistration(id));
         model.addAttribute("students", studentRepository.findAll());
+        model.addAttribute("classes", classRepository.findAll());
 		return "registration/edit";
 	}
 	

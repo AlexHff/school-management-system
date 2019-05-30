@@ -6,11 +6,19 @@
 </head>
 <body>
 	<h3>Edit school</h3>
-	<form action="#" th:object="${quarter}" th:action="@{update}" th:method="put">
-        <p>Number: <input type="number" th:field="*{number}"/></p>
-        <p>Start date: <input type="date" th:field="*{startDate}"/></p>
-        <p>End date: <input type="date" th:field="*{endDate}"/></p>
-        <p>School year: <input type="number" th:field="*{schoolYear.id}"/></p>
+	<form action="#" th:object="${registration}" th:action="@{update}" th:method="put">
+        <p>Student:
+	        <select th:field="*{student.id}" id="student" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a student</option>
+			    <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.id} + ' ' + ${student.name} + ' ' + ${student.forename}"></option>
+			</select>
+		</p>
+        <p>Class:
+	        <select th:field="*{c.id}" id="c" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a class</option>
+			    <option th:each="class : ${classes}" th:value="${class.id}" th:text="${class.name}"></option>
+			</select>
+		</p>
         <p><input type="submit" value="Submit"/></p>
     </form>
 </body>
