@@ -20,7 +20,6 @@ public class Student extends Person {
 
 	/**
 	 * @param id
-	 * @param person
 	 */
 	public Student(Integer id) {
 		super();

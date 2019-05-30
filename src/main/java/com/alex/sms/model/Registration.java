@@ -29,7 +29,7 @@ public class Registration {
 	/**
 	 * @param id
 	 * @param c
-	 * @param person
+	 * @param student
 	 */
 	public Registration(Integer id, Class c, Student student) {
 		super();
@@ -67,16 +67,16 @@ public class Registration {
 	}
 
 	/**
-	 * @return the person
+	 * @return the student
 	 */
 	public Student getStudent() {
 		return student;
 	}
 
 	/**
-	 * @param person the person to set
+	 * @param student the student to set
 	 */
-	public void setPerson(Student student) {
+	public void setStudent(Student student) {
 		this.student = student;
 	}
 }
