@@ -17,7 +17,7 @@ public class Registration {
 	private Class c;
 	
 	@OneToOne
-	private Person person;
+	private Student student;
 
 	/**
 	 * 
@@ -31,11 +31,11 @@ public class Registration {
 	 * @param c
 	 * @param person
 	 */
-	public Registration(Integer id, Class c, Person person) {
+	public Registration(Integer id, Class c, Student student) {
 		super();
 		this.id = id;
 		this.c = c;
-		this.person = person;
+		this.student = student;
 	}
 
 	/**
@@ -69,14 +69,14 @@ public class Registration {
 	/**
 	 * @return the person
 	 */
-	public Person getPerson() {
-		return person;
+	public Student getStudent() {
+		return student;
 	}
 
 	/**
 	 * @param person the person to set
 	 */
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setPerson(Student student) {
+		this.student = student;
 	}
 }

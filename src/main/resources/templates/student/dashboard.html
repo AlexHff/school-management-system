@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Student dashboard</h1>
+	<h3>All students</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Name</th>
+	            <th>Forename</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${students.empty}">
+	            <td colspan="2">No Student Available</td>
+	        </tr>
+	        <tr th:each="student : ${students}">
+	            <td><span th:text="${student.id}">id</span></td>
+	            <td><a th:href="${student.id}"><span th:text="${student.name}">name</span></a></td>
+	            <td><a th:href="${student.id}"><span th:text="${student.forename}">forenamename</span></a></td>
+	            <td><a th:href="@{{id}/edit(id=${student.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${student}" th:action="@{/student/delete}" th:method="delete">
+	            		<input type="hidden" id="student" name="student" th:value="${student.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new student</h3>
+	<form action="#" th:object="${student}" th:action="@{/student/create}" method="post">
+        <p>name: <input type="text" th:field="*{name}"/></p>
+        <p>forename: <input type="text" th:field="*{forename}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>
