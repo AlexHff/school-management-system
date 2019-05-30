@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>Edit school</h3>
+	<form action="#" th:object="${reportCard}" th:action="@{update}" th:method="put">
+        <p>Quarter:
+	        <select th:field="*{quarter.id}" id="quarter" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a quarter</option>
+			    <option th:each="quarter : ${quarters}" th:value="${quarter.id}" th:text="${quarter.number}"></option>
+			</select>
+		</p>
+        <p>Registration:
+	        <select th:field="*{registration.id}" id="c" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a registration</option>
+			    <option th:each="registration : ${registrations}" th:value="${registration.id}" th:text="${registration.id}"></option>
+			</select>
+		</p>
+		<p>Appreciation: <input type="text" th:field="*{appreciation}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+</html>
