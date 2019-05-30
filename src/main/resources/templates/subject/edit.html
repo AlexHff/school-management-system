@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Wenger Systems</title>
+</head>
+<body>
+	<h3>Edit level</h3>
+	<form action="#" th:object="${subject}" th:action="@{update}" th:method="put">
+        <p>name: <input type="text" th:field="*{name}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+</html>

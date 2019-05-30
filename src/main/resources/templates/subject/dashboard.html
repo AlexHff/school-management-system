@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Subject dashboard</h1>
+	<h3>All subjects</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Name</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${subjects.empty}">
+	            <td colspan="2">No Subjects Available</td>
+	        </tr>
+	        <tr th:each="subject : ${subjects}">
+	            <td><span th:text="${subject.id}">id</span></td>
+	            <td><a th:href="${subject.id}"><span th:text="${subject.name}">name</span></a></td>
+	            <td><a th:href="@{{id}/edit(id=${subject.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${subject}" th:action="@{/subject/delete}" th:method="delete">
+	            		<input type="hidden" id="subject" name="subject" th:value="${subject.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new subject</h3>
+	<form action="#" th:object="${subject}" th:action="@{/subject/create}" method="post">
+        <p>name: <input type="text" th:field="*{name}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>
