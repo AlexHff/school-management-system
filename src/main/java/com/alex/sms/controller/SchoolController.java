@@ -29,17 +29,17 @@ public class SchoolController {
         return "school/dashboard";
     }
 	
-	@GetMapping(path="/all")
-	public @ResponseBody Iterable<School> getAllSchools() {
-		return schoolRepository.findAll();
-	}
-	
 	@GetMapping(path="/{id}")
 	public @ResponseBody School getSchool (@PathVariable(value = "id") Integer id)
 			throws SchoolNotFoundException {
 		School s = schoolRepository.findById(id)
 				.orElseThrow(() -> new SchoolNotFoundException(id));
 		return s;
+	}
+	
+	@GetMapping(path="/all")
+	public @ResponseBody Iterable<School> getAllSchools() {
+		return schoolRepository.findAll();
 	}
 
     @PostMapping("/create")

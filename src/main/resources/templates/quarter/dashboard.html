@@ -32,7 +32,7 @@
 	            <td><span th:text="${quarter.schoolYear.id}">school_year_id</span></td>
 	            <td><a th:href="@{{id}/edit(id=${quarter.id})}"><button type="button">Edit</button></a></td>
 	            <td>
-	            	<form action="#" th:object="${quarter}" th:action="@{/school/delete}" th:method="delete">
+	            	<form action="#" th:object="${quarter}" th:action="@{/quarter/delete}" th:method="delete">
 	            		<input type="hidden" id="quarter" name="quarter" th:value="${quarter.id}">
 	            		<input type="submit" value="Delete"/>
 	            	</form>

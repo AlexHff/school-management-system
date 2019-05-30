@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>Edit school</h3>
+	<form action="#" th:object="${quarter}" th:action="@{update}" th:method="put">
+        <p>Number: <input type="number" th:field="*{number}"/></p>
+        <p>Start date: <input type="date" th:field="*{startDate}"/></p>
+        <p>End date: <input type="date" th:field="*{endDate}"/></p>
+        <p>School year: <input type="number" th:field="*{schoolYear.id}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>
