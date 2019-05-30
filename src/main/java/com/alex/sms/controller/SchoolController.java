@@ -71,7 +71,7 @@ public class SchoolController {
     }
 	
 	@DeleteMapping("/delete")
-    public String schoolDelete(@ModelAttribute School s) {
+    public String deleteSchool(@ModelAttribute School s) {
 		schoolRepository.delete(s);
         return "redirect:dashboard";
     }

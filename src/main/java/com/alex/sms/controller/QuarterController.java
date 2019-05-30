@@ -3,6 +3,7 @@ package com.alex.sms.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class QuarterController {
 		return "quarter/dashboard";
 	}
 	
-	@PostMapping("/create")
+	@PostMapping(path="/create")
 	public String createQuarter (@ModelAttribute Quarter q) {
 		try {
 			schoolYearRepository.findById(q.getSchoolYear().getId())
@@ -45,7 +46,13 @@ public class QuarterController {
 	}
 
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<Quarter> getAllUsers() {
+	public @ResponseBody Iterable<Quarter> getAllQuarters() {
 		return quarterRepository.findAll();
 	}
+	
+	@DeleteMapping("/delete")
+    public String deleteQuarter(@ModelAttribute Quarter q) {
+		quarterRepository.delete(q);
+        return "redirect:dashboard";
+    }
 }
