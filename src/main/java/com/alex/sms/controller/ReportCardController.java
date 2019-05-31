@@ -76,7 +76,9 @@ public class ReportCardController {
 	@DeleteMapping("/delete")
     public String deleteReportCard(@ModelAttribute ReportCard s) {
 		System.out.println("DELETE 1");
+		System.out.println(s.getId());
 		reportCardRepository.delete(s);
+		System.out.println(s.getId());
 		System.out.println("DELETE 2");
         return "redirect:/report_card/dashboard";
     }

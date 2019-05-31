@@ -1,5 +1,6 @@
 package com.alex.sms.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,9 @@ public class ReportCard {
 	
 	@NotNull
 	String appreciation;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="reportCard")
+    private ReportCardDetail reportCardDetail;
 
 	/**
 	 * 
