@@ -70,6 +70,9 @@
                                     </div>
                                     <div class="stats-data">
                                         <div class="stats-number"><span th:text="${#lists.size(subjects)}">subjects</span></div>
+                                        <div class="stats-change">
+                                            <span class="stats-timeframe">maths, physics and more</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,18 +85,7 @@
                                     <div class="spur-card-icon">
                                         <i class="fas fa-chart-bar"></i>
                                     </div>
-                                    <div class="spur-card-title"> Bar Chart </div>
-                                    <div class="spur-card-menu">
-                                        <div class="dropdown show">
-                                            <a class="spur-card-menu-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="spur-card-title"> Number of students per year </div>
                                 </div>
                                 <div class="card-body spur-card-body-chart">
                                     <canvas id="spurChartjsBar"></canvas>
