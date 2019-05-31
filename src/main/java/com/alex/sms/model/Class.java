@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Class {
@@ -12,14 +13,18 @@ public class Class {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
+	@NotNull
 	private String name;
 	
+	@NotNull
 	@ManyToOne
 	private School school;
 	
+	@NotNull
 	@ManyToOne
 	private Level level;
 	
+	@NotNull
 	@ManyToOne
 	private SchoolYear schoolYear;
 
