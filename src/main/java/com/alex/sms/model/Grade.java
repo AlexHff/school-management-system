@@ -5,18 +5,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Grade {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
+
+	@NotNull
 	@ManyToOne
 	private ReportCardDetail reportCardDetail;
-	
+
+	@NotNull
 	double value;
-	
+
+	@NotNull
 	String appreciation;
 
 	/**

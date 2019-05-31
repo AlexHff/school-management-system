@@ -4,15 +4,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public class Person {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
+
+	@NotNull
 	private String name;
-	
+
+	@NotNull
 	private String forename;
 
 	/**

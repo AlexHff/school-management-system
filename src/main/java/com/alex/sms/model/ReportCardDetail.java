@@ -9,16 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ReportCardDetail {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
+
+	@NotNull
 	@OneToOne
 	private ReportCard reportCard;
-	
+
+	@NotNull
 	@ManyToOne
 	private Teaching teaching;
 	

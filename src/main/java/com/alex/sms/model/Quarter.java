@@ -1,8 +1,10 @@
 package com.alex.sms.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,20 +13,27 @@ public class Quarter {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
+
+	@NotNull
 	private Integer number;
-	
+
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
-	
+
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
-	
+
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "school_year_id")
 	private SchoolYear schoolYear;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="quarter")
+    private List<ReportCard> reportCards;
 
 	/**
 	 * 
