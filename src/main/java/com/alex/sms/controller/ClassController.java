@@ -16,6 +16,7 @@ import com.alex.sms.exception.ClassNotFoundException;
 import com.alex.sms.model.Class;
 import com.alex.sms.repository.ClassRepository;
 import com.alex.sms.repository.LevelRepository;
+import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.SchoolRepository;
 import com.alex.sms.repository.SchoolYearRepository;
 
@@ -33,6 +34,9 @@ public class ClassController {
 	
 	@Autowired
 	private LevelRepository levelRepository;
+
+	@Autowired
+	private RegistrationRepository registrationRepository;
 	
 	@GetMapping("/dashboard")
     public String classIndex(Model model) {
@@ -45,11 +49,13 @@ public class ClassController {
     }
 	
 	@GetMapping(path="/{id}")
-	public @ResponseBody Class getClass (@PathVariable(value = "id") Integer id)
+	public String getClass (@PathVariable(value = "id") Integer id, Model model)
 			throws ClassNotFoundException {
 		Class s = classRepository.findById(id)
 				.orElseThrow(() -> new ClassNotFoundException());
-		return s;
+        model.addAttribute("class", s);
+        model.addAttribute("registrations", registrationRepository.findByCId(id));
+		return "class/view";
 	}
 	
 	@GetMapping(path="/all")
@@ -66,7 +72,9 @@ public class ClassController {
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormClass(@PathVariable(value = "id") Integer id,
 			Model model) throws ClassNotFoundException {
-    	model.addAttribute("class", this.getClass(id));
+    	Class s = classRepository.findById(id)
+				.orElseThrow(() -> new ClassNotFoundException());
+    	model.addAttribute("class", s);
         model.addAttribute("schools", schoolRepository.findAll());
         model.addAttribute("levels", levelRepository.findAll());
         model.addAttribute("schoolYears", schoolYearRepository.findAll());

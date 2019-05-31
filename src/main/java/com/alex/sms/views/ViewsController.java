@@ -44,9 +44,4 @@ public class ViewsController {
 	public String error404() {
 		return "error/404";
 	}
-	
-	@GetMapping("/test")
-	public String dist() {
-		return "dist/html/index";
-	}
 }
