@@ -54,8 +54,10 @@ public class RegistrationController {
 
     @PostMapping("/create")
     public String createRegistration(@ModelAttribute Registration s) {
-		registrationRepository.save(s);
-    	System.out.println(s.getC() + " " + s.getStudent());
+    	if(registrationRepository.findByStudentId(s.getStudent().getId()) != null)
+    		System.out.println("Student already has a class.");
+    	else
+    		registrationRepository.save(s);
         return "redirect:dashboard";
     }
     

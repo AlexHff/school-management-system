@@ -1,25 +1,36 @@
 package com.alex.sms.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Teaching {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	
+
+	@NotNull
 	@ManyToOne
 	private Class c;
-	
+
+	@NotNull
 	@ManyToOne
 	private Subject subject;
-	
+
+	@NotNull
 	@ManyToOne
 	private Teacher teacher;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="teaching")
+    private List<ReportCardDetail> ReportCardDetails;
 
 	/**
 	 * 

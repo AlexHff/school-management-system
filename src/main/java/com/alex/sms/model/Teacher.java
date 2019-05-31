@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Teacher extends Person {
@@ -16,7 +15,6 @@ public class Teacher extends Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
-	@NotNull
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="teacher")
     private List<Teaching> teachings;
 

@@ -46,7 +46,7 @@
 			    <option th:each="student : ${students}" th:value="${student.id}" th:text="${student.id} + ' ' + ${student.name} + ' ' + ${student.forename}"></option>
 			</select>
 		</p>
-        <p>Level:
+        <p>Class:
 	        <select th:field="*{c.id}" id="c" onChange="onstatechange(this)" class="infobox">
 			    <option value="0">Select a class</option>
 			    <option th:each="class : ${classes}" th:value="${class.id}" th:text="${class.name}"></option>

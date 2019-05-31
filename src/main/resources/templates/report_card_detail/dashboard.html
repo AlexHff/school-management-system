@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<h1>Report Card dashboard</h1>
+	<h1>Report Card detail dashboard</h1>
 	<h3>All reportCardDetails</h3>
 	<table>
 	    <thead>
@@ -46,7 +46,7 @@
 			    <option th:each="reportCard : ${reportCards}" th:value="${reportCard.id}" th:text="${reportCard.id}"></option>
 			</select>
 		</p>
-        <p>Registration:
+        <p>Teaching:
 	        <select th:field="*{teaching.id}" id="c" onChange="onstatechange(this)" class="infobox">
 			    <option value="0">Select a teaching</option>
 			    <option th:each="teaching : ${teachings}" th:value="${teaching.id}" th:text="${teaching.id}"></option>
