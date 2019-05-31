@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Wenger Systems</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>Grade dashboard</h1>
+	<h3>All grades</h3>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Id</th>
+	            <th>Appreciation</th>
+	            <th>Value</th>
+	            <th>Report card</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    <tr th:if="${grades.empty}">
+	            <td colspan="2">No Grades Available</td>
+	        </tr>
+	        <tr th:each="grade : ${grades}">
+	            <td><span th:text="${grade.id}">id</span></td>
+	            <td><span th:text="${grade.appreciation}">appreciation</span></td>
+	            <td><span th:text="${grade.value}">value</span></td>
+	            <td><span th:text="${grade.reportCardDetail.id}">reportCardDetail</span></td>
+	            <td><a th:href="@{{id}/edit(id=${grade.id})}"><button type="button">Edit</button></a></td>
+	            <td>
+	            	<form action="#" th:object="${grade}" th:action="@{/grade/delete}" th:method="delete">
+	            		<input type="hidden" id="grade" name="grade" th:value="${grade.id}">
+	            		<input type="submit" value="Delete"/>
+	            	</form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	<h3>Add new grade</h3>
+	<form action="#" th:object="${grade}" th:action="@{/grade/create}" method="post">
+        <p>Report card:
+	        <select th:field="*{reportCardDetail.id}" id="reportCardDetail" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a reportCardDetail</option>
+			    <option th:each="reportCardDetail : ${reportCardDetails}" th:value="${reportCardDetail.id}" th:text="${reportCardDetail.id}"></option>
+			</select>
+		</p>
+		<p>Appreciation: <input type="text" th:field="*{appreciation}"/></p>
+		<p>Value: <input type="number" th:field="*{value}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>

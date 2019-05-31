@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Wenger Systems</title>
+</head>
+<body>
+	<h3>Edit grade</h3>
+	<form action="#" th:object="${grade}" th:action="@{update}" th:method="put">
+        <p>Report card:
+	        <select th:field="*{reportCardDetail.id}" id="reportCardDetail" onChange="onstatechange(this)" class="infobox">
+			    <option value="0">Select a reportCardDetail</option>
+			    <option th:each="reportCardDetail : ${reportCardDetails}" th:value="${reportCardDetail.id}" th:text="${reportCardDetail.id}"></option>
+			</select>
+		</p>
+		<p>Appreciation: <input type="text" th:field="*{appreciation}"/></p>
+		<p>Value: <input type="number" th:field="*{value}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</body>
+</html>
