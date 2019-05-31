@@ -54,7 +54,10 @@ public class ReportCardController {
 
     @PostMapping("/create")
     public String createReportCard(@ModelAttribute ReportCard s) {
-		reportCardRepository.save(s);
+    	if(reportCardRepository.findByRegistrationId(s.getRegistration().getId()) != null)
+    		System.out.println("Student already has a class.");
+    	else
+    		reportCardRepository.save(s);
         return "redirect:/report_card/dashboard";
     }
     
@@ -75,11 +78,7 @@ public class ReportCardController {
 	
 	@DeleteMapping("/delete")
     public String deleteReportCard(@ModelAttribute ReportCard s) {
-		System.out.println("DELETE 1");
-		System.out.println(s.getId());
 		reportCardRepository.delete(s);
-		System.out.println(s.getId());
-		System.out.println("DELETE 2");
         return "redirect:/report_card/dashboard";
     }
 }
