@@ -1,15 +1,20 @@
 package com.alex.sms.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Student extends Person {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="student")
+    private Registration registration;
 
 	/**
 	 * 

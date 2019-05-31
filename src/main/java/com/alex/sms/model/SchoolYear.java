@@ -1,8 +1,12 @@
 package com.alex.sms.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class SchoolYear {
@@ -10,10 +14,11 @@ public class SchoolYear {
 	@Column(unique=true)
 	private Integer id;
 	
-	/*
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "schoolYear")
-	private List<Quarter> quarters;
-	*/
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="schoolYear")
+    private List<Class> classes;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="schoolYear")
+    private List<Quarter> quarters;
 
 	/**
 	 * 
