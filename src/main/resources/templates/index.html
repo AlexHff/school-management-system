@@ -162,7 +162,7 @@
 									            <td colspan="2">No students in this class</td>
 									        </tr>
 									        <tr th:each="registration : ${registrations}">
-									            <td><span th:text="${registration.student.id}">id</span></td>
+									            <td><span th:text="${registration.id}">id</span></td>
 									            <td><a th:href="@{/student/{id}(id=${registration.student.id})}"><span th:text="${registration.student.name}">name</span></a></td>
 									            <td><a th:href="@{/student/{id}(id=${registration.student.id})}"><span th:text="${registration.student.forename}">forename</span></a></td>
 									            <td><a th:href="@{/class/{id}(id=${registration.c.id})}"><span th:text="${registration.c.name}">class</span></a></td>

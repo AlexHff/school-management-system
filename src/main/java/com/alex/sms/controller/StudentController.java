@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alex.sms.exception.StudentNotFoundException;
 import com.alex.sms.model.Student;
+import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.StudentRepository;
 
 @Controller
@@ -21,6 +22,9 @@ import com.alex.sms.repository.StudentRepository;
 public class StudentController {
 	@Autowired
 	private StudentRepository studentRepository;
+
+	@Autowired
+	private RegistrationRepository registrationRepository;
 	
 	@GetMapping("/dashboard")
     public String studentIndex(Model model) {
@@ -30,11 +34,13 @@ public class StudentController {
     }
 	
 	@GetMapping(path="/{id}")
-	public @ResponseBody Student getStudent (@PathVariable(value = "id") Integer id)
+	public String getStudent (@PathVariable(value = "id") Integer id, Model model)
 			throws StudentNotFoundException {
 		Student s = studentRepository.findById(id)
 				.orElseThrow(() -> new StudentNotFoundException());
-		return s;
+        model.addAttribute("student", s);
+        model.addAttribute("registration", registrationRepository.findByStudentId(s.getId()));
+		return "student/view";
 	}
 	
 	@GetMapping(path="/all")
@@ -51,7 +57,9 @@ public class StudentController {
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormStudent(@PathVariable(value = "id") Integer id,
 			Model model) throws StudentNotFoundException {
-    	model.addAttribute("student", this.getStudent(id));
+    	Student s = studentRepository.findById(id)
+				.orElseThrow(() -> new StudentNotFoundException());
+    	model.addAttribute("student", s);
 		return "student/edit";
 	}
 	
