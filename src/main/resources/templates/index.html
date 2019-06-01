@@ -85,19 +85,30 @@
                                     <div class="spur-card-icon">
                                         <i class="fas fa-chart-bar"></i>
                                     </div>
-                                    <div class="spur-card-title"> Number of students per year </div>
+                                    <div class="spur-card-title"> Number of classes per year </div>
                                 </div>
                                 <div class="card-body spur-card-body-chart">
                                     <canvas id="spurChartjsBar"></canvas>
-                                    <script>
+                                    <script th:inline="javascript">
+	                                    /*<![CDATA[*/
+		                                    var students = /*[[${#lists.size(classes)}]]*/;
+		                                    var years = [];
+		                                    years.push(/*[[${schoolYears.get(4).id}]]*/);
+		                                    years.push(/*[[${schoolYears.get(3).id}]]*/);
+		                                    years.push(/*[[${schoolYears.get(2).id}]]*/);
+		                                    years.push(/*[[${schoolYears.get(1).id}]]*/);
+		                                    years.push(/*[[${schoolYears.get(0).id}]]*/);
+		                                    console.log(years);
+		                                /*]]>*/
+                                    
                                         var ctx = document.getElementById("spurChartjsBar").getContext('2d');
                                         var myChart = new Chart(ctx, {
                                             type: 'bar',
                                             data: {
-                                                labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                                labels: years,
                                                 datasets: [{
-                                                    label: 'Blue',
-                                                    data: [12, 19, 3, 5, 2],
+                                                    label: 'Classes',
+                                                    data: [students, 19, 3, 5, 2],
                                                     backgroundColor: window.chartColors.primary,
                                                     borderColor: 'transparent'
                                                 }]
@@ -121,41 +132,36 @@
                         </div>
                         <div class="col-xl-6">
                             <div class="card spur-card">
-                                <div class="card-header">
-                                    <div class="spur-card-icon">
-                                        <i class="fas fa-bell"></i>
-                                    </div>
-                                    <div class="spur-card-title"> Notifications </div>
-                                </div>
-                                <div class="card-body ">
-                                    <div class="notifications">
-                                        <a href="#!" class="notification">
-                                            <div class="notification-icon">
-                                                <i class="fas fa-inbox"></i>
-                                            </div>
-                                            <div class="notification-text">New comment</div>
-                                            <span class="notification-time">21 days ago</span>
-                                        </a>
-                                        <a href="#!" class="notification">
-                                            <div class="notification-icon">
-                                                <i class="fas fa-inbox"></i>
-                                            </div>
-                                            <div class="notification-text">New comment</div>
-                                            <span class="notification-time">21 days ago</span>
-                                        </a>
-                                        <a href="#!" class="notification">
-                                            <div class="notification-icon">
-                                                <i class="fas fa-inbox"></i>
-                                            </div>
-                                            <div class="notification-text">New comment</div>
-                                            <span class="notification-time">21 days ago</span>
-                                        </a>
-                                        <div class="notifications-show-all">
-                                            <a href="#!">Show all</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+		                        <div class="card-header">
+		                            <div class="spur-card-icon">
+		                                <i class="fas fa-table"></i>
+		                            </div>
+		                            <div class="spur-card-title">Last registrations</div>
+		                        </div>
+		                        <div class="card-body ">
+		                            <table class="table table-hover table-in-card">
+		                                <thead>
+		                                    <tr>
+		                                        <th scope="col">#</th>
+		                                        <th scope="col">Name</th>
+		                                        <th scope="col">Forename</th>
+		                                        <th scope="col">Class</th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody>
+		                                    <tr th:if="${registrations.empty}">
+									            <td colspan="2">No students in this class</td>
+									        </tr>
+									        <tr th:each="registration : ${registrations}">
+									            <td><span th:text="${registration.student.id}">id</span></td>
+									            <td><a th:href="@{/student/{id}(id=${registration.student.id})}"><span th:text="${registration.student.name}">name</span></a></td>
+									            <td><a th:href="@{/student/{id}(id=${registration.student.id})}"><span th:text="${registration.student.forename}">forename</span></a></td>
+									            <td><a th:href="@{/class/{id}(id=${registration.c.id})}"><span th:text="${registration.c.name}">class</span></a></td>
+									        </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
                         </div>
                     </div>
                 </div>

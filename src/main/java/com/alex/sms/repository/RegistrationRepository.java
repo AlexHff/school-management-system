@@ -6,5 +6,6 @@ import com.alex.sms.model.Registration;
 
 public interface RegistrationRepository extends CrudRepository<Registration, Integer> {
 	Iterable<Registration> findByCId(Integer id);
+	Iterable<Registration> findFirst5ByOrderByIdDesc();
 	Registration findByStudentId(Integer id);
 }

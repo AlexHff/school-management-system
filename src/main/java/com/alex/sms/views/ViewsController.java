@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alex.sms.repository.ClassRepository;
+import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.SchoolRepository;
+import com.alex.sms.repository.SchoolYearRepository;
 import com.alex.sms.repository.StudentRepository;
 import com.alex.sms.repository.SubjectRepository;
 import com.alex.sms.repository.TeacherRepository;
@@ -23,12 +25,18 @@ public class ViewsController {
 	
 	@Autowired
 	private SchoolRepository schoolRepository;
-
+	
+	@Autowired
+	private SchoolYearRepository schoolYearRepository;
+	
 	@Autowired
 	private ClassRepository classRepository;
 
 	@Autowired
 	private SubjectRepository subjectRepository;
+
+	@Autowired
+	private RegistrationRepository registrationRepository;
 	
 	@GetMapping("/")
 	public String index(Model model) {
@@ -37,6 +45,8 @@ public class ViewsController {
         model.addAttribute("schools", schoolRepository.findAll());
         model.addAttribute("classes", classRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
+        model.addAttribute("schoolYears", schoolYearRepository.findFirst5ByOrderByIdDesc());
+        model.addAttribute("registrations", registrationRepository.findFirst5ByOrderByIdDesc());
 		return "index";
 	}
 	
