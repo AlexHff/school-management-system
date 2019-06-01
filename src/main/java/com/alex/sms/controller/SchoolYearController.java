@@ -43,7 +43,8 @@ public class SchoolYearController {
 
     @PostMapping("/create")
     public String createSchoolYear(@ModelAttribute SchoolYear s) {
-		schoolYearRepository.save(s);
+    	if(!schoolYearRepository.existsById(s.getId()))
+    		schoolYearRepository.save(s);
         return "redirect:dashboard";
     }
 	

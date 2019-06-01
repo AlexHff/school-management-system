@@ -1,5 +1,8 @@
 package com.alex.sms.model;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +17,9 @@ public class Registration {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	
+	@NotNull
+	private Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
 	@NotNull
 	@ManyToOne

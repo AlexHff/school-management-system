@@ -1,11 +1,14 @@
 package com.alex.sms.views;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.alex.sms.model.SchoolYear;
 import com.alex.sms.repository.ClassRepository;
 import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.SchoolRepository;
@@ -45,8 +48,16 @@ public class ViewsController {
         model.addAttribute("schools", schoolRepository.findAll());
         model.addAttribute("classes", classRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
-        model.addAttribute("schoolYears", schoolYearRepository.findFirst5ByOrderByIdDesc());
         model.addAttribute("registrations", registrationRepository.findFirst5ByOrderByIdDesc());
+        model.addAttribute("schoolYears", schoolYearRepository.findFirst5ByOrderByIdDesc());
+        Iterable<SchoolYear> years = schoolYearRepository.findFirst5ByOrderByIdDesc();
+        List<SchoolYear> list = (List<SchoolYear>) years;
+        for(int i = 0; i < list.size(); ++i) {
+        	String attributeName = "class" + i;
+        	Iterable<com.alex.sms.model.Class> attributeValue = classRepository
+        			.findBySchoolYearId(list.get(i).getId());
+        	model.addAttribute(attributeName, attributeValue);
+        }
 		return "index";
 	}
 	

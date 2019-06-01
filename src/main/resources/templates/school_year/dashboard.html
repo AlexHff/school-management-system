@@ -22,7 +22,7 @@
 	        <tr th:each="schoolYear : ${schoolYears}">
 	            <td><span th:text="${schoolYear.id}">id</span></td>
 	            <td>
-	            	<form action="#" th:object="${schoolYear}" th:action="@{/schoolYear/delete}" th:method="delete">
+	            	<form action="#" th:object="${schoolYear}" th:action="@{/school_year/delete}" th:method="delete">
 	            		<input type="hidden" id="schoolYear" name="schoolYear" th:value="${schoolYear.id}">
 	            		<input type="submit" value="Delete"/>
 	            	</form>

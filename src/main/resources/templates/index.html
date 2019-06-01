@@ -91,14 +91,30 @@
                                     <canvas id="spurChartjsBar"></canvas>
                                     <script th:inline="javascript">
 	                                    /*<![CDATA[*/
-		                                    var students = /*[[${#lists.size(classes)}]]*/;
-		                                    var years = [];
-		                                    years.push(/*[[${schoolYears.get(4).id}]]*/);
-		                                    years.push(/*[[${schoolYears.get(3).id}]]*/);
-		                                    years.push(/*[[${schoolYears.get(2).id}]]*/);
-		                                    years.push(/*[[${schoolYears.get(1).id}]]*/);
-		                                    years.push(/*[[${schoolYears.get(0).id}]]*/);
-		                                    console.log(years);
+			                                var years = [];
+	                                    	x = /*[[${#lists.size(schoolYears)}]]*/;
+	                                    	console.log(x);
+	                                    	if(/*[[${#lists.size(schoolYears)}]]*/ > 4) {
+			                                    years.push(/*[[${schoolYears.get(4).id}]]*/);
+			                                    years.push(/*[[${schoolYears.get(3).id}]]*/);
+			                                    years.push(/*[[${schoolYears.get(2).id}]]*/);
+			                                    years.push(/*[[${schoolYears.get(1).id}]]*/);
+			                                    years.push(/*[[${schoolYears.get(0).id}]]*/);
+	                                    	}
+
+		                                    var classes = [];
+	                                    	if(/*[[${#lists.size(class4)}]]*/ > 0) {
+	                                    		classes.push(/*[[${#lists.size(class4)}]]*/);
+	                                    	}
+	                                    	if(/*[[${#lists.size(class3)}]]*/ > 0) {
+	                                    		classes.push(/*[[${#lists.size(class3)}]]*/);
+	                                    	}if(/*[[${#lists.size(class2)}]]*/ > 0) {
+	                                    		classes.push(/*[[${#lists.size(class2)}]]*/);
+	                                    	}if(/*[[${#lists.size(class1)}]]*/ > 0) {
+	                                    		classes.push(/*[[${#lists.size(class1)}]]*/);
+	                                    	}if(/*[[${#lists.size(class0)}]]*/ > 0) {
+	                                    		classes.push(/*[[${#lists.size(class0)}]]*/);
+	                                    	}
 		                                /*]]>*/
                                     
                                         var ctx = document.getElementById("spurChartjsBar").getContext('2d');
@@ -108,7 +124,7 @@
                                                 labels: years,
                                                 datasets: [{
                                                     label: 'Classes',
-                                                    data: [students, 19, 3, 5, 2],
+                                                    data: classes,
                                                     backgroundColor: window.chartColors.primary,
                                                     borderColor: 'transparent'
                                                 }]
