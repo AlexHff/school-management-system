@@ -19,7 +19,7 @@ public class Level {
 	@NotNull
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="level")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="level")
     private List<Class> classes;
 
 	/**

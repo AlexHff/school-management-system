@@ -25,7 +25,7 @@ public class ReportCardDetail {
 	@ManyToOne
 	private Teaching teaching;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="reportCardDetail")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="reportCardDetail")
     private List<Grade> grades;
 	
 	String appreciation;

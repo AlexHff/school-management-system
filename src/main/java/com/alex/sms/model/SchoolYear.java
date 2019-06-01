@@ -17,7 +17,7 @@ public class SchoolYear {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="schoolYear")
     private List<Class> classes;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="schoolYear")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="schoolYear")
     private List<Quarter> quarters;
 
 	/**

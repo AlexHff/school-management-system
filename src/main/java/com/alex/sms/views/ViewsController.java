@@ -48,7 +48,7 @@ public class ViewsController {
         model.addAttribute("schools", schoolRepository.findAll());
         model.addAttribute("classes", classRepository.findAll());
         model.addAttribute("subjects", subjectRepository.findAll());
-        model.addAttribute("registrations", registrationRepository.findFirst5ByOrderByIdDesc());
+        model.addAttribute("registrations", registrationRepository.findFirst5ByOrderByTimestampDesc());
         model.addAttribute("schoolYears", schoolYearRepository.findFirst5ByOrderByIdDesc());
         Iterable<SchoolYear> years = schoolYearRepository.findFirst5ByOrderByIdDesc();
         List<SchoolYear> list = (List<SchoolYear>) years;

@@ -26,7 +26,7 @@ public class ReportCard {
 	@NotNull
 	String appreciation;
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="reportCard")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="reportCard")
     private ReportCardDetail reportCardDetail;
 
 	/**

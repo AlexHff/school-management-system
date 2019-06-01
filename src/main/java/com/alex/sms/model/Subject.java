@@ -19,7 +19,7 @@ public class Subject {
 	@NotNull
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="subject")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="subject")
     private List<Teaching> teachings;
 
 	/**

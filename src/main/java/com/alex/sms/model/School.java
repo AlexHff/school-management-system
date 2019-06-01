@@ -19,7 +19,7 @@ public class School {
 	@NotNull
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="school")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="school")
     private List<Class> classes;
 	
 	/**

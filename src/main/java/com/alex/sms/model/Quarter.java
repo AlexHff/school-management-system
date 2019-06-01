@@ -32,7 +32,7 @@ public class Quarter {
 	@JoinColumn(name = "school_year_id")
 	private SchoolYear schoolYear;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="quarter")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="quarter")
     private List<ReportCard> reportCards;
 
 	/**

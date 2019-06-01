@@ -13,7 +13,7 @@ public class Student extends Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
-	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy="student")
+	@OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy="student")
     private Registration registration;
 
 	/**

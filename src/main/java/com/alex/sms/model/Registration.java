@@ -29,7 +29,7 @@ public class Registration {
 	@OneToOne
 	private Student student;
 	
-	@OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy="registration")
+	@OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy="registration")
     private ReportCard reportCard;
 
 	/**

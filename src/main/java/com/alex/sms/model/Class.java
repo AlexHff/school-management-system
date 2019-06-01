@@ -32,10 +32,10 @@ public class Class {
 	@ManyToOne
 	private SchoolYear schoolYear;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="c")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="c")
     private List<Teaching> teachings;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="c")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="c")
     private List<Registration> registrations;
 
 	/**

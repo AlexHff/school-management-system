@@ -29,7 +29,7 @@ public class Teaching {
 	@ManyToOne
 	private Teacher teacher;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="teaching")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="teaching")
     private List<ReportCardDetail> ReportCardDetails;
 
 	/**

@@ -15,7 +15,7 @@ public class Teacher extends Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="teacher")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="teacher")
     private List<Teaching> teachings;
 
 	/**
