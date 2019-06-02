@@ -91,7 +91,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:if="${reportCardDetails.empty}">
+                                    <tr th:if="${reportCardDetails?.empty}">
 							            <td>No records for the student</td>
 							        </tr>
 							        <tr th:each="reportCardDetail : ${reportCardDetails}">
