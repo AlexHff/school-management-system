@@ -74,6 +74,35 @@
 						  	</div>
                         </div>
                     </div>
+                    <div class="card spur-card">
+                        <div class="card-header">
+                            <div class="spur-card-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            <div class="spur-card-title"> Report card </div>
+                        </div>
+                        <div class="card-body ">
+                            <table class="table table-in-card">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Subject</th>
+                                        <th scope="col">Mean</th>
+                                        <th scope="col">Appreciation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:if="${reportCardDetails.empty}">
+							            <td>No records for the student</td>
+							        </tr>
+							        <tr th:each="reportCardDetail : ${reportCardDetails}">
+							            <td><span th:text="${reportCardDetail.teaching.subject.name}">subject</span></td>
+							            <td><span th:text="${reportCardDetail.teaching.subject.name}">subject</span></td>
+							            <td><span th:text="${reportCardDetail.appreciation}">subject</span></td>
+							        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 	<a href="/student/dashboard"><button type="button" class="btn btn-primary mb-1">Back to students</button></a>
                 </div>
             </main>

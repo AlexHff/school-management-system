@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,7 +17,7 @@ public class ReportCardDetail {
 	private Integer id;
 
 	@NotNull
-	@OneToOne
+	@ManyToOne
 	private ReportCard reportCard;
 
 	@NotNull
