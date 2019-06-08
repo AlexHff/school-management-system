@@ -72,7 +72,10 @@ public class ReportCardController {
 	
 	@PutMapping("/{id}/update")
     public String updateReportCard(@ModelAttribute ReportCard s) {
-		reportCardRepository.save(s);
+		if(reportCardRepository.findByRegistrationId(s.getRegistration().getId()) != null)
+    		System.out.println("Student already has a class.");
+    	else
+    		reportCardRepository.save(s);
 		return "redirect:/report_card/dashboard";
     }
 	
