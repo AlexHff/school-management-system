@@ -101,13 +101,21 @@
                                     <tr th:if="${reportCardDetails?.empty}">
 							            <td>No records for the student</td>
 							        </tr>
-							        <tr th:each="reportCardDetail : ${reportCardDetails}">
+							        <tr th:each="reportCardDetail, iter : ${reportCardDetails}">
 							            <td><span th:text="${reportCardDetail.teaching.subject.name}">subject</span></td>
-							            <td><span th:text="${reportCardDetail.teaching.subject.name}">subject</span></td>
-							            <td><span th:text="${reportCardDetail.appreciation}">subject</span></td>
+							            <td><span th:text="${means.get(iter.index)}">mean</span></td>
+							            <td><span th:text="${reportCardDetail.appreciation}">appreciation</span></td>
 							        </tr>
                                 </tbody>
-                            </table>
+                            </table><br>
+                            <div class="row" style="margin-bottom:15px">
+								<div class="col-sm-2">
+						      		<strong>Global mean</strong>
+						    	</div>
+						    	<div class="col-sm">
+						      		<strong><span th:text="${mean}">mean</span></strong>
+						    	</div>
+						  	</div>
                         </div>
                     </div>
                 	<a href="/student/dashboard"><button type="button" class="btn btn-primary mb-1">Back to students</button></a>

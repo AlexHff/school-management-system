@@ -69,36 +69,11 @@ public class StudentController {
 					Iterable<ReportCardDetail> q = reportCardDetailRepository.findByReportCardId(p.getId());
 			        model.addAttribute("reportCard", p);
 					if(q != null) {
-						List<ReportCardDetail> list = (List<ReportCardDetail>) q;
-						List<Grade> grades = new ArrayList<Grade>();
-						List<Double> means = new ArrayList<Double>();
-						int j, sum;
-						double mean;
-						for(int i = 0; i < list.size(); ++i) {
-							List<Grade> g = (List<Grade>) gradeRepository.findByReportCardDetailId(list.get(i).getId());
-							j = 0;
-							sum = 0;
-							mean = 0;
-							for(int k = 0; k < g.size(); ++k) {
-								grades.add(g.get(k));
-								sum += g.get(k).getValue();
-								j = k + 1;
-							}
-							if(j != 0)
-								mean = (double) sum / j;
-							else
-								mean = 0;
-							means.add(mean);
-						}
-						/** **/
-						for(int i = 0; i < grades.size(); ++i)
-							System.out.println(grades.get(i).getReportCardDetail().getTeaching().getSubject()
-									.getName() + " " + grades.get(i).getValue() + " " + grades.get(i)
-									.getAppreciation());
-				        System.out.println(means);
-						/** **/
+						List<Double> means = this.findMeans(q);
+						Double mean = sum(means)/means.size();
 				        model.addAttribute("reportCardDetails", q);
-				        model.addAttribute("grades", grades);
+				        model.addAttribute("means", means);
+				        model.addAttribute("mean", mean);
 					}
 				}
 			}
@@ -114,7 +89,6 @@ public class StudentController {
 	@GetMapping(path="/search")
 	public String searchStudent (@RequestParam(value = "search", required = false) String q, Model model)
 			throws ClassNotFoundException {
-		System.out.println(q);
 		Iterable<Student> students = studentRepository.findByNameOrForenameContaining(q, q);
         model.addAttribute("students", students);
 		return "student/result";
@@ -146,4 +120,37 @@ public class StudentController {
 		studentRepository.delete(s);
         return "redirect:dashboard";
     }
+	
+	public List<Double> findMeans(Iterable<ReportCardDetail> q) {
+		List<ReportCardDetail> list = (List<ReportCardDetail>) q;
+		List<Grade> grades = new ArrayList<Grade>();
+		List<Double> means = new ArrayList<Double>();
+		int j, sum;
+		double mean;
+		for(int i = 0; i < list.size(); ++i) {
+			List<Grade> g = (List<Grade>) gradeRepository.findByReportCardDetailId(list.get(i).getId());
+			j = 0;
+			sum = 0;
+			mean = 0;
+			for(int k = 0; k < g.size(); ++k) {
+				grades.add(g.get(k));
+				sum += g.get(k).getValue();
+				j = k + 1;
+			}
+			if(j != 0)
+				mean = (double) sum / j;
+			else
+				mean = 0;
+			means.add(mean);
+		}
+		return means;
+	}
+	
+	public static Double sum(List<Double> list) {
+		Double sum = 0.0;
+		for(int i = 0; i < list.size(); ++i) {
+			sum += list.get(i);
+		}
+		return sum;
+	}
 }

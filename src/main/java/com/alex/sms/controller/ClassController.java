@@ -67,7 +67,6 @@ public class ClassController {
 	@GetMapping(path="/search")
 	public String searchClass (@RequestParam(value = "search", required = false) String q, Model model)
 			throws ClassNotFoundException {
-		System.out.println(q);
 		Iterable<Class> classes = classRepository.findByNameContaining(q);
         model.addAttribute("classes", classes);
 		return "class/result";

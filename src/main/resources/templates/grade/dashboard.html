@@ -38,7 +38,7 @@
                                         <th scope="col">Id</th>
                                         <th scope="col">Appreciation</th>
                                         <th scope="col">Value</th>
-                                        <th scope="col">Report card</th>
+                                        <th scope="col">Report card detail</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                     </tr>
@@ -74,11 +74,11 @@
 	                    <div class="card-body ">
 	                        <form action="#" th:object="${grade}" th:action="@{/grade/create}" method="post">
 	                        	<div class="form-group row">
-                                    <label for="inputReportcard" class="col-sm-2 col-form-label">Report card</label>
+                                    <label for="inputReportcard" class="col-sm-2 col-form-label">Report card detail</label>
 	                                <div class="col-sm-10">
 	                                    <select th:field="*{reportCardDetail.id}" id="reportCardDetail" onChange="onstatechange(this)" class="form-control">
 											    <option value="" disabled selected>Select a reportCardDetail</option>
-											    <option th:each="reportCardDetail : ${reportCardDetails}" th:value="${reportCardDetail.id}" th:text="${reportCardDetail.id}"></option>
+											    <option th:each="reportCardDetail : ${reportCardDetails}" th:value="${reportCardDetail.id}" th:text="${reportCardDetail.id} + ' - ' + ${reportCardDetail.reportCard.registration.student.name} + ' ' + ${reportCardDetail.reportCard.registration.student.forename}"></option>
 										</select>
 	                                </div>
                                 </div>
