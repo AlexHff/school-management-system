@@ -41,14 +41,19 @@ public class Registration {
 
 	/**
 	 * @param id
+	 * @param timestamp
 	 * @param c
 	 * @param student
+	 * @param reportCard
 	 */
-	public Registration(Integer id, Class c, Student student) {
+	public Registration(Integer id, @NotNull Timestamp timestamp, @NotNull Class c, @NotNull Student student,
+			ReportCard reportCard) {
 		super();
 		this.id = id;
+		this.timestamp = timestamp;
 		this.c = c;
 		this.student = student;
+		this.reportCard = reportCard;
 	}
 
 	/**
@@ -91,5 +96,33 @@ public class Registration {
 	 */
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+
+	/**
+	 * @return the timestamp
+	 */
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	/**
+	 * @return the reportCard
+	 */
+	public ReportCard getReportCard() {
+		return reportCard;
+	}
+
+	/**
+	 * @param reportCard the reportCard to set
+	 */
+	public void setReportCard(ReportCard reportCard) {
+		this.reportCard = reportCard;
 	}
 }

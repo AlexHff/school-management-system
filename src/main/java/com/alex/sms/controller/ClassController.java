@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alex.sms.exception.ClassNotFoundException;
@@ -61,6 +62,15 @@ public class ClassController {
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Class> getAllClasss() {
 		return classRepository.findAll();
+	}
+	
+	@GetMapping(path="/search")
+	public String searchClass (@RequestParam(value = "search", required = false) String q, Model model)
+			throws ClassNotFoundException {
+		System.out.println(q);
+		Iterable<Class> classes = classRepository.findByNameContaining(q);
+        model.addAttribute("classes", classes);
+		return "class/result";
 	}
 
     @PostMapping("/create")

@@ -16,7 +16,7 @@
     <div class="dash">
         <div th:replace="fragments/nav :: nav"></div>
         <div class="dash-app">
-            <header class="dash-toolbar">
+        	<header class="dash-toolbar">
                 <a href="#!" class="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </a>
@@ -155,6 +155,7 @@
 		                                        <th scope="col">Name</th>
 		                                        <th scope="col">Forename</th>
 		                                        <th scope="col">Class</th>
+		                                        <th scope="col">Timestamp</th>
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
@@ -166,6 +167,7 @@
 									            <td><a th:href="@{/student/{id}(id=${registration.student.id})}"><span th:text="${registration.student.name}">name</span></a></td>
 									            <td><a th:href="@{/student/{id}(id=${registration.student.id})}"><span th:text="${registration.student.forename}">forename</span></a></td>
 									            <td><a th:href="@{/class/{id}(id=${registration.c.id})}"><span th:text="${registration.c.name}">class</span></a></td>
+									            <td><span th:text="${#dates.format(registration.timestamp, 'dd-MM-yyyy HH:mm:ss')}">timestamp</span></td>
 									        </tr>
 		                                </tbody>
 		                            </table>
