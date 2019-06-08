@@ -1,5 +1,5 @@
 # school-management-system
-An school management tool written in Java using Spring Framework.
+A school management tool written in Java using Spring Framework.
 
 # Dependencies
 * [Maven](https://maven.apache.org/) - Dependency Management
