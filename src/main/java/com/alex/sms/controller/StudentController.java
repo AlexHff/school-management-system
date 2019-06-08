@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alex.sms.exception.ClassNotFoundException;
 import com.alex.sms.exception.StudentNotFoundException;
 import com.alex.sms.model.Grade;
 import com.alex.sms.model.Registration;
@@ -107,6 +109,15 @@ public class StudentController {
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Student> getAllStudents() {
 		return studentRepository.findAll();
+	}
+	
+	@GetMapping(path="/search")
+	public String searchStudent (@RequestParam(value = "search", required = false) String q, Model model)
+			throws ClassNotFoundException {
+		System.out.println(q);
+		Iterable<Student> students = studentRepository.findByNameOrForenameContaining(q, q);
+        model.addAttribute("students", students);
+		return "student/result";
 	}
 
     @PostMapping("/create")
