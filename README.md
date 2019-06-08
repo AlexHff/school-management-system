@@ -2,15 +2,11 @@
 An school management tool written in Java using Spring Framework.
 
 # Dependencies
-- mysql-connector-java
-- spring-boot-starter-data-elasticsearch
-- spring-boot-devtools
-- spring-boot-maven-plugin
-- spring-boot-starter-data-jpa
-- spring-boot-starter-test
-- spring-boot-starter-thymeleaf
-- spring-boot-starter-web
-- hibernate
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [Hibernate](https://hibernate.org/) - Domain model persistence for relational database
+* [Thymeleaf](https://www.thymeleaf.org/) - Server-side Java template engine
+* [Tomcat](http://tomcat.apache.org/) - Java Servlet
+* [Elasticsearch](https://www.elastic.co) - Search engine based on the Lucene library
 
 # References
 - [Spring Documentation](https://spring.io/)
