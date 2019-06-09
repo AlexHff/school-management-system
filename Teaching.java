@@ -11,39 +11,51 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Teaching.
+ */
 @Entity
 public class Teaching {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
+	/** The c. */
 	@NotNull
 	@ManyToOne
 	private Class c;
 
+	/** The subject. */
 	@NotNull
 	@ManyToOne
 	private Subject subject;
 
+	/** The teacher. */
 	@NotNull
 	@ManyToOne
 	private Teacher teacher;
 	
+	/** The Report card details. */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="teaching")
     private List<ReportCardDetail> ReportCardDetails;
 
 	/**
-	 * 
+	 * Instantiates a new teaching.
 	 */
 	public Teaching() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param c
-	 * @param subject
-	 * @param teacher
+	 * Instantiates a new teaching.
+	 *
+	 * @param id the id
+	 * @param c the c
+	 * @param subject the subject
+	 * @param teacher the teacher
 	 */
 	public Teaching(Integer id, Class c, Subject subject, Teacher teacher) {
 		super();
@@ -54,6 +66,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -61,6 +75,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -68,6 +84,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Gets the c.
+	 *
 	 * @return the c
 	 */
 	public Class getC() {
@@ -75,6 +93,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Sets the c.
+	 *
 	 * @param c the c to set
 	 */
 	public void setC(Class c) {
@@ -82,6 +102,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Gets the subject.
+	 *
 	 * @return the subject
 	 */
 	public Subject getSubject() {
@@ -89,6 +111,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Sets the subject.
+	 *
 	 * @param subject the subject to set
 	 */
 	public void setSubject(Subject subject) {
@@ -96,6 +120,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Gets the teacher.
+	 *
 	 * @return the teacher
 	 */
 	public Teacher getTeacher() {
@@ -103,6 +129,8 @@ public class Teaching {
 	}
 
 	/**
+	 * Sets the teacher.
+	 *
 	 * @param teacher the teacher to set
 	 */
 	public void setTeacher(Teacher teacher) {
