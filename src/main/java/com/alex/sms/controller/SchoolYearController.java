@@ -15,12 +15,24 @@ import com.alex.sms.exception.SchoolYearNotFoundException;
 import com.alex.sms.model.SchoolYear;
 import com.alex.sms.repository.SchoolYearRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SchoolYearController.
+ */
 @Controller
 @RequestMapping(path = "school_year")
 public class SchoolYearController {
+	
+	/** The school year repository. */
 	@Autowired
 	private SchoolYearRepository schoolYearRepository;
 	
+	/**
+	 * School year index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String schoolYearIndex(Model model) {
         model.addAttribute("schoolYear", new SchoolYear());
@@ -28,6 +40,13 @@ public class SchoolYearController {
         return "school_year/dashboard";
     }
 	
+	/**
+	 * Gets the school year.
+	 *
+	 * @param id the id
+	 * @return the school year
+	 * @throws SchoolYearNotFoundException the school year not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody SchoolYear getSchoolYear (@PathVariable(value = "id") Integer id)
 			throws SchoolYearNotFoundException {
@@ -36,11 +55,22 @@ public class SchoolYearController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all school years.
+	 *
+	 * @return the all school years
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<SchoolYear> getAllSchoolYears() {
 		return schoolYearRepository.findAll();
 	}
 
+    /**
+     * Creates the school year.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createSchoolYear(@ModelAttribute SchoolYear s) {
     	if(!schoolYearRepository.existsById(s.getId()))
@@ -48,6 +78,12 @@ public class SchoolYearController {
         return "redirect:dashboard";
     }
 	
+	/**
+	 * Delete school year.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteSchoolYear(@ModelAttribute SchoolYear s) {
 		schoolYearRepository.delete(s);

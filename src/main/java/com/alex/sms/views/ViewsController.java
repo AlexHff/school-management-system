@@ -19,30 +19,48 @@ import com.alex.sms.repository.StudentRepository;
 import com.alex.sms.repository.SubjectRepository;
 import com.alex.sms.repository.TeacherRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ViewsController.
+ */
 @Controller
 @RequestMapping
 public class ViewsController {
+	
+	/** The student repository. */
 	@Autowired
 	StudentRepository studentRepository;
 	
+	/** The teacher repository. */
 	@Autowired
 	private TeacherRepository teacherRepository;
 	
+	/** The school repository. */
 	@Autowired
 	private SchoolRepository schoolRepository;
 	
+	/** The school year repository. */
 	@Autowired
 	private SchoolYearRepository schoolYearRepository;
 	
+	/** The class repository. */
 	@Autowired
 	private ClassRepository classRepository;
 
+	/** The subject repository. */
 	@Autowired
 	private SubjectRepository subjectRepository;
 
+	/** The registration repository. */
 	@Autowired
 	private RegistrationRepository registrationRepository;
 	
+	/**
+	 * Index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/")
 	public String index(Model model) {
         model.addAttribute("students", studentRepository.findAll());
@@ -63,6 +81,11 @@ public class ViewsController {
 		return "index";
 	}
 	
+	/**
+	 * Error 404.
+	 *
+	 * @return the string
+	 */
 	@ResponseStatus(value=HttpStatus.NOT_FOUND)
 	public String error404() {
 		return "error/404";

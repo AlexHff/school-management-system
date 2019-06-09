@@ -7,34 +7,45 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Grade.
+ */
 @Entity
 public class Grade {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
+	/** The report card detail. */
 	@NotNull
 	@ManyToOne
 	private ReportCardDetail reportCardDetail;
 
+	/** The value. */
 	@NotNull
 	double value;
 
+	/** The appreciation. */
 	@NotNull
 	String appreciation;
 
 	/**
-	 * 
+	 * Instantiates a new grade.
 	 */
 	public Grade() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param reportCardDetail
-	 * @param value
-	 * @param appreciation
+	 * Instantiates a new grade.
+	 *
+	 * @param id the id
+	 * @param reportCardDetail the report card detail
+	 * @param value the value
+	 * @param appreciation the appreciation
 	 */
 	public Grade(Integer id, ReportCardDetail reportCardDetail, double value, String appreciation) {
 		super();
@@ -45,6 +56,8 @@ public class Grade {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -52,6 +65,8 @@ public class Grade {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -59,6 +74,8 @@ public class Grade {
 	}
 
 	/**
+	 * Gets the report card detail.
+	 *
 	 * @return the reportCardDetail
 	 */
 	public ReportCardDetail getReportCardDetail() {
@@ -66,6 +83,8 @@ public class Grade {
 	}
 
 	/**
+	 * Sets the report card detail.
+	 *
 	 * @param reportCardDetail the reportCardDetail to set
 	 */
 	public void setReportCardDetail(ReportCardDetail reportCardDetail) {
@@ -73,6 +92,8 @@ public class Grade {
 	}
 
 	/**
+	 * Gets the value.
+	 *
 	 * @return the value
 	 */
 	public double getValue() {
@@ -80,6 +101,8 @@ public class Grade {
 	}
 
 	/**
+	 * Sets the value.
+	 *
 	 * @param value the value to set
 	 */
 	public void setValue(double value) {
@@ -87,6 +110,8 @@ public class Grade {
 	}
 
 	/**
+	 * Gets the appreciation.
+	 *
 	 * @return the appreciation
 	 */
 	public String getAppreciation() {
@@ -94,6 +119,8 @@ public class Grade {
 	}
 
 	/**
+	 * Sets the appreciation.
+	 *
 	 * @param appreciation the appreciation to set
 	 */
 	public void setAppreciation(String appreciation) {

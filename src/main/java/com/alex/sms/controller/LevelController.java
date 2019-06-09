@@ -16,12 +16,24 @@ import com.alex.sms.exception.LevelNotFoundException;
 import com.alex.sms.model.Level;
 import com.alex.sms.repository.LevelRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LevelController.
+ */
 @Controller
 @RequestMapping(path="/level")
 public class LevelController {
+	
+	/** The level repository. */
 	@Autowired
 	private LevelRepository levelRepository;
 	
+	/**
+	 * Level index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String levelIndex(Model model) {
         model.addAttribute("level", new Level());
@@ -29,6 +41,13 @@ public class LevelController {
         return "level/dashboard";
     }
 	
+	/**
+	 * Gets the level.
+	 *
+	 * @param id the id
+	 * @return the level
+	 * @throws LevelNotFoundException the level not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody Level getLevel (@PathVariable(value = "id") Integer id)
 			throws LevelNotFoundException {
@@ -37,17 +56,36 @@ public class LevelController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all levels.
+	 *
+	 * @return the all levels
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Level> getAllLevels() {
 		return levelRepository.findAll();
 	}
 
+    /**
+     * Creates the level.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createLevel(@ModelAttribute Level s) {
 		levelRepository.save(s);
         return "redirect:dashboard";
     }
     
+    /**
+     * View update form level.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws LevelNotFoundException the level not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormLevel(@PathVariable(value = "id") Integer id,
 			Model model) throws LevelNotFoundException {
@@ -55,12 +93,24 @@ public class LevelController {
 		return "level/edit";
 	}
 	
+	/**
+	 * Update level.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateLevel(@ModelAttribute Level s) {
 		levelRepository.save(s);
 		return "redirect:/level/dashboard";
     }
 	
+	/**
+	 * Delete level.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteLevel(@ModelAttribute Level s) {
 		levelRepository.delete(s);

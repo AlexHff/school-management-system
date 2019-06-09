@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+// TODO: Auto-generated Javadoc
 /**
  * https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
  *
@@ -15,7 +16,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class GlobalDefaultExceptionHandler {
+
+/** The Constant DEFAULT_ERROR_VIEW. */
 public static final String DEFAULT_ERROR_VIEW = "error";
+	
+	/**
+	 * Default error handler.
+	 *
+	 * @param req the req
+	 * @param e the e
+	 * @return the string
+	 * @throws Exception the exception
+	 */
 	@ExceptionHandler(value = Exception.class)
 	public String defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
 		if (AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class) != null)

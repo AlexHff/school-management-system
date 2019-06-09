@@ -19,18 +19,32 @@ import com.alex.sms.repository.ReportCardDetailRepository;
 import com.alex.sms.repository.ReportCardRepository;
 import com.alex.sms.repository.TeachingRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReportCardDetailController.
+ */
 @Controller
 @RequestMapping(path="/report_card_detail")
 public class ReportCardDetailController {
+	
+	/** The report card detail repository. */
 	@Autowired
 	private ReportCardDetailRepository reportCardDetailRepository;
 	
+	/** The report card repository. */
 	@Autowired
 	private ReportCardRepository reportCardRepository;
 	
+	/** The teaching repository. */
 	@Autowired
 	private TeachingRepository teachingRepository;
 	
+	/**
+	 * Report card detail index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String reportCardDetailIndex(Model model) {
         model.addAttribute("reportCardDetail", new ReportCardDetail());
@@ -40,6 +54,13 @@ public class ReportCardDetailController {
         return "report_card_detail/dashboard";
     }
 	
+	/**
+	 * Gets the report card detail.
+	 *
+	 * @param id the id
+	 * @return the report card detail
+	 * @throws ReportCardDetailNotFoundException the report card detail not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody ReportCardDetail getReportCardDetail (@PathVariable(value = "id") Integer id)
 			throws ReportCardDetailNotFoundException {
@@ -48,17 +69,36 @@ public class ReportCardDetailController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all report card details.
+	 *
+	 * @return the all report card details
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<ReportCard> getAllReportCardDetails() {
 		return reportCardRepository.findAll();
 	}
 
+    /**
+     * Creates the report card detail.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createReportCardDetail(@ModelAttribute ReportCardDetail s) {
 		reportCardDetailRepository.save(s);
         return "redirect:/report_card_detail/dashboard";
     }
     
+    /**
+     * View update form report card detail.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws ReportCardDetailNotFoundException the report card detail not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormReportCardDetail(@PathVariable(value = "id") Integer id,
 			Model model) throws ReportCardDetailNotFoundException {
@@ -68,12 +108,24 @@ public class ReportCardDetailController {
 		return "report_card_detail/edit";
 	}
 	
+	/**
+	 * Update report card detail.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateReportCardDetail(@ModelAttribute ReportCardDetail s) {
 		reportCardDetailRepository.save(s);
 		return "redirect:/report_card_detail/dashboard";
     }
 	
+	/**
+	 * Delete report card detail.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteReportCardDetail(@ModelAttribute ReportCardDetail s) {
 		reportCardDetailRepository.delete(s);

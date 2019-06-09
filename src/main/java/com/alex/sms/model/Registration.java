@@ -12,39 +12,51 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Registration.
+ */
 @Entity
 public class Registration {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
+	/** The timestamp. */
 	@NotNull
 	private Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 
+	/** The c. */
 	@NotNull
 	@ManyToOne
 	private Class c;
 
+	/** The student. */
 	@NotNull
 	@OneToOne
 	private Student student;
 	
+	/** The report card. */
 	@OneToOne(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, mappedBy="registration")
     private ReportCard reportCard;
 
 	/**
-	 * 
+	 * Instantiates a new registration.
 	 */
 	public Registration() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param timestamp
-	 * @param c
-	 * @param student
-	 * @param reportCard
+	 * Instantiates a new registration.
+	 *
+	 * @param id the id
+	 * @param timestamp the timestamp
+	 * @param c the c
+	 * @param student the student
+	 * @param reportCard the report card
 	 */
 	public Registration(Integer id, @NotNull Timestamp timestamp, @NotNull Class c, @NotNull Student student,
 			ReportCard reportCard) {
@@ -57,6 +69,8 @@ public class Registration {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -64,6 +78,8 @@ public class Registration {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -71,6 +87,8 @@ public class Registration {
 	}
 
 	/**
+	 * Gets the c.
+	 *
 	 * @return the c
 	 */
 	public Class getC() {
@@ -78,6 +96,8 @@ public class Registration {
 	}
 
 	/**
+	 * Sets the c.
+	 *
 	 * @param c the c to set
 	 */
 	public void setC(Class c) {
@@ -85,6 +105,8 @@ public class Registration {
 	}
 
 	/**
+	 * Gets the student.
+	 *
 	 * @return the student
 	 */
 	public Student getStudent() {
@@ -92,6 +114,8 @@ public class Registration {
 	}
 
 	/**
+	 * Sets the student.
+	 *
 	 * @param student the student to set
 	 */
 	public void setStudent(Student student) {
@@ -99,6 +123,8 @@ public class Registration {
 	}
 
 	/**
+	 * Gets the timestamp.
+	 *
 	 * @return the timestamp
 	 */
 	public Timestamp getTimestamp() {
@@ -106,6 +132,8 @@ public class Registration {
 	}
 
 	/**
+	 * Sets the timestamp.
+	 *
 	 * @param timestamp the timestamp to set
 	 */
 	public void setTimestamp(Timestamp timestamp) {
@@ -113,6 +141,8 @@ public class Registration {
 	}
 
 	/**
+	 * Gets the report card.
+	 *
 	 * @return the reportCard
 	 */
 	public ReportCard getReportCard() {
@@ -120,6 +150,8 @@ public class Registration {
 	}
 
 	/**
+	 * Sets the report card.
+	 *
 	 * @param reportCard the reportCard to set
 	 */
 	public void setReportCard(ReportCard reportCard) {

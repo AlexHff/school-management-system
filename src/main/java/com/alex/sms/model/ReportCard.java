@@ -12,38 +12,50 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReportCard.
+ */
 @Entity
 public class ReportCard {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
+	/** The quarter. */
 	@NotNull
 	@ManyToOne
 	private Quarter quarter;
 
+	/** The registration. */
 	@NotNull
 	@OneToOne
 	private Registration registration;
 	
+	/** The appreciation. */
 	@NotNull
 	String appreciation;
 	
+	/** The report card detail. */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="reportCard")
     private List<ReportCardDetail> reportCardDetail;
 
 	/**
-	 * 
+	 * Instantiates a new report card.
 	 */
 	public ReportCard() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param quarter
-	 * @param registration
-	 * @param appreciation
+	 * Instantiates a new report card.
+	 *
+	 * @param id the id
+	 * @param quarter the quarter
+	 * @param registration the registration
+	 * @param appreciation the appreciation
 	 */
 	public ReportCard(Integer id, Quarter quarter, Registration registration, String appreciation) {
 		super();
@@ -54,6 +66,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -61,6 +75,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -68,6 +84,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Gets the quarter.
+	 *
 	 * @return the quarter
 	 */
 	public Quarter getQuarter() {
@@ -75,6 +93,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Sets the quarter.
+	 *
 	 * @param quarter the quarter to set
 	 */
 	public void setQuarter(Quarter quarter) {
@@ -82,6 +102,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Gets the registration.
+	 *
 	 * @return the registration
 	 */
 	public Registration getRegistration() {
@@ -89,6 +111,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Sets the registration.
+	 *
 	 * @param registration the registration to set
 	 */
 	public void setRegistration(Registration registration) {
@@ -96,6 +120,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Gets the appreciation.
+	 *
 	 * @return the appreciation
 	 */
 	public String getAppreciation() {
@@ -103,6 +129,8 @@ public class ReportCard {
 	}
 
 	/**
+	 * Sets the appreciation.
+	 *
 	 * @param appreciation the appreciation to set
 	 */
 	public void setAppreciation(String appreciation) {

@@ -16,12 +16,24 @@ import com.alex.sms.exception.TeacherNotFoundException;
 import com.alex.sms.model.Teacher;
 import com.alex.sms.repository.TeacherRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TeacherController.
+ */
 @Controller
 @RequestMapping(path="/teacher")
 public class TeacherController {
+	
+	/** The teacher repository. */
 	@Autowired
 	private TeacherRepository teacherRepository;
 	
+	/**
+	 * Teacher index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String teacherIndex(Model model) {
         model.addAttribute("teacher", new Teacher());
@@ -29,6 +41,13 @@ public class TeacherController {
         return "teacher/dashboard";
     }
 	
+	/**
+	 * Gets the teacher.
+	 *
+	 * @param id the id
+	 * @return the teacher
+	 * @throws TeacherNotFoundException the teacher not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody Teacher getTeacher (@PathVariable(value = "id") Integer id)
 			throws TeacherNotFoundException {
@@ -37,17 +56,36 @@ public class TeacherController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all teachers.
+	 *
+	 * @return the all teachers
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Teacher> getAllTeachers() {
 		return teacherRepository.findAll();
 	}
 
+    /**
+     * Creates the teacher.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createTeacher(@ModelAttribute Teacher s) {
 		teacherRepository.save(s);
         return "redirect:dashboard";
     }
     
+    /**
+     * View update form teacher.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws TeacherNotFoundException the teacher not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormTeacher(@PathVariable(value = "id") Integer id,
 			Model model) throws TeacherNotFoundException {
@@ -55,12 +93,24 @@ public class TeacherController {
 		return "teacher/edit";
 	}
 	
+	/**
+	 * Update teacher.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateTeacher(@ModelAttribute Teacher s) {
 		teacherRepository.save(s);
 		return "redirect:/teacher/dashboard";
     }
 	
+	/**
+	 * Delete teacher.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteTeacher(@ModelAttribute Teacher s) {
 		teacherRepository.delete(s);

@@ -10,37 +10,49 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReportCardDetail.
+ */
 @Entity
 public class ReportCardDetail {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
+	/** The report card. */
 	@NotNull
 	@ManyToOne
 	private ReportCard reportCard;
 
+	/** The teaching. */
 	@NotNull
 	@ManyToOne
 	private Teaching teaching;
 	
+	/** The grades. */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="reportCardDetail")
     private List<Grade> grades;
 	
+	/** The appreciation. */
 	String appreciation;
 
 	/**
-	 * 
+	 * Instantiates a new report card detail.
 	 */
 	public ReportCardDetail() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param reportCard
-	 * @param teaching
-	 * @param appreciation
+	 * Instantiates a new report card detail.
+	 *
+	 * @param id the id
+	 * @param reportCard the report card
+	 * @param teaching the teaching
+	 * @param appreciation the appreciation
 	 */
 	public ReportCardDetail(Integer id, ReportCard reportCard, Teaching teaching, String appreciation) {
 		super();
@@ -51,6 +63,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -58,6 +72,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -65,6 +81,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Gets the report card.
+	 *
 	 * @return the reportCard
 	 */
 	public ReportCard getReportCard() {
@@ -72,6 +90,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Sets the report card.
+	 *
 	 * @param reportCard the reportCard to set
 	 */
 	public void setReportCard(ReportCard reportCard) {
@@ -79,6 +99,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Gets the teaching.
+	 *
 	 * @return the teaching
 	 */
 	public Teaching getTeaching() {
@@ -86,6 +108,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Sets the teaching.
+	 *
 	 * @param teaching the teaching to set
 	 */
 	public void setTeaching(Teaching teaching) {
@@ -93,6 +117,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Gets the appreciation.
+	 *
 	 * @return the appreciation
 	 */
 	public String getAppreciation() {
@@ -100,6 +126,8 @@ public class ReportCardDetail {
 	}
 
 	/**
+	 * Sets the appreciation.
+	 *
 	 * @param appreciation the appreciation to set
 	 */
 	public void setAppreciation(String appreciation) {

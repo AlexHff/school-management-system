@@ -10,28 +10,38 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Level.
+ */
 @Entity
 public class Level {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
+	/** The name. */
 	@NotNull
 	private String name;
 	
+	/** The classes. */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="level")
     private List<Class> classes;
 
 	/**
-	 * 
+	 * Instantiates a new level.
 	 */
 	public Level() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param name
+	 * Instantiates a new level.
+	 *
+	 * @param id the id
+	 * @param name the name
 	 */
 	public Level(Integer id, String name) {
 		super();
@@ -40,6 +50,8 @@ public class Level {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -47,6 +59,8 @@ public class Level {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -54,6 +68,8 @@ public class Level {
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -61,6 +77,8 @@ public class Level {
 	}
 
 	/**
+	 * Sets the name.
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {

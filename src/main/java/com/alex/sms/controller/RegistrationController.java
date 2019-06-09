@@ -18,18 +18,32 @@ import com.alex.sms.repository.ClassRepository;
 import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.StudentRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegistrationController.
+ */
 @Controller
 @RequestMapping(path="/registration")
 public class RegistrationController {
+	
+	/** The registration repository. */
 	@Autowired
 	private RegistrationRepository registrationRepository;
 
+	/** The class repository. */
 	@Autowired
 	private ClassRepository classRepository;
 	
+	/** The student repository. */
 	@Autowired
 	private StudentRepository studentRepository;
 	
+	/**
+	 * Registration index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String registrationIndex(Model model) {
         model.addAttribute("registration", new Registration());
@@ -39,6 +53,13 @@ public class RegistrationController {
         return "registration/dashboard";
     }
 	
+	/**
+	 * Gets the registration.
+	 *
+	 * @param id the id
+	 * @return the registration
+	 * @throws RegistrationNotFoundException the registration not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody Registration getRegistration (@PathVariable(value = "id") Integer id)
 			throws RegistrationNotFoundException {
@@ -47,11 +68,22 @@ public class RegistrationController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all registrations.
+	 *
+	 * @return the all registrations
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Registration> getAllRegistrations() {
 		return registrationRepository.findAll();
 	}
 
+    /**
+     * Creates the registration.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createRegistration(@ModelAttribute Registration s) {
     	if(registrationRepository.findByStudentId(s.getStudent().getId()) != null)
@@ -61,6 +93,14 @@ public class RegistrationController {
         return "redirect:dashboard";
     }
     
+    /**
+     * View update form registration.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws RegistrationNotFoundException the registration not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormRegistration(@PathVariable(value = "id") Integer id,
 			Model model) throws RegistrationNotFoundException {
@@ -70,12 +110,24 @@ public class RegistrationController {
 		return "registration/edit";
 	}
 	
+	/**
+	 * Update registration.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateRegistration(@ModelAttribute Registration s) {
 		registrationRepository.save(s);
 		return "redirect:/registration/dashboard";
     }
 	
+	/**
+	 * Delete registration.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteRegistration(@ModelAttribute Registration s) {
 		registrationRepository.delete(s);

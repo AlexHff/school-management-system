@@ -19,21 +19,36 @@ import com.alex.sms.repository.SubjectRepository;
 import com.alex.sms.repository.TeachingRepository;
 import com.alex.sms.repository.TeacherRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TeachingController.
+ */
 @Controller
 @RequestMapping(path="/teaching")
 public class TeachingController {
+	
+	/** The teaching repository. */
 	@Autowired
 	private TeachingRepository teachingRepository;
 
+	/** The subject repository. */
 	@Autowired
 	private SubjectRepository subjectRepository;
 	
+	/** The teacher repository. */
 	@Autowired
 	private TeacherRepository teacherRepository;
 	
+	/** The class repository. */
 	@Autowired
 	private ClassRepository classRepository;
 	
+	/**
+	 * Teaching index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String teachingIndex(Model model) {
         model.addAttribute("teaching", new Teaching());
@@ -44,6 +59,13 @@ public class TeachingController {
         return "teaching/dashboard";
     }
 	
+	/**
+	 * Gets the teaching.
+	 *
+	 * @param id the id
+	 * @return the teaching
+	 * @throws TeachingNotFoundException the teaching not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody Teaching getTeaching (@PathVariable(value = "id") Integer id)
 			throws TeachingNotFoundException {
@@ -52,17 +74,36 @@ public class TeachingController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all teachings.
+	 *
+	 * @return the all teachings
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Teaching> getAllTeachings() {
 		return teachingRepository.findAll();
 	}
 
+    /**
+     * Creates the teaching.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createTeaching(@ModelAttribute Teaching s) {
 		teachingRepository.save(s);
         return "redirect:dashboard";
     }
     
+    /**
+     * View update form teaching.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws TeachingNotFoundException the teaching not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormTeaching(@PathVariable(value = "id") Integer id,
 			Model model) throws TeachingNotFoundException {
@@ -74,12 +115,24 @@ public class TeachingController {
 		return "teaching/edit";
 	}
 	
+	/**
+	 * Update teaching.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateTeaching(@ModelAttribute Teaching s) {
 		teachingRepository.save(s);
 		return "redirect:/teaching/dashboard";
     }
 	
+	/**
+	 * Delete teaching.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteTeaching(@ModelAttribute Teaching s) {
 		teachingRepository.delete(s);

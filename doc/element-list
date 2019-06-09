@@ -1,0 +1,6 @@
+com.alex.sms
+com.alex.sms.controller
+com.alex.sms.exception
+com.alex.sms.model
+com.alex.sms.repository
+com.alex.sms.views

@@ -19,15 +19,28 @@ import com.alex.sms.model.SchoolYear;
 import com.alex.sms.repository.QuarterRepository;
 import com.alex.sms.repository.SchoolYearRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class QuarterController.
+ */
 @Controller
 @RequestMapping(path="/quarter")
 public class QuarterController {
+	
+	/** The quarter repository. */
 	@Autowired
 	private QuarterRepository quarterRepository;
 	
+	/** The school year repository. */
 	@Autowired
 	private SchoolYearRepository schoolYearRepository;
 	
+	/**
+	 * Quarter index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping(path="/dashboard")
 	public String quarterIndex(Model model) {
 		model.addAttribute("quarter", new Quarter());
@@ -35,6 +48,13 @@ public class QuarterController {
 		return "quarter/dashboard";
 	}
 
+	/**
+	 * Gets the quarter.
+	 *
+	 * @param id the id
+	 * @return the quarter
+	 * @throws QuarterNotFoundException the quarter not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody Quarter getQuarter (@PathVariable(value = "id") Integer id)
 			throws QuarterNotFoundException {
@@ -43,11 +63,22 @@ public class QuarterController {
 		return q;
 	}
 
+	/**
+	 * Gets the all quarters.
+	 *
+	 * @return the all quarters
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Quarter> getAllQuarters() {
 		return quarterRepository.findAll();
 	}
 	
+	/**
+	 * Creates the quarter.
+	 *
+	 * @param q the q
+	 * @return the string
+	 */
 	@PostMapping(path="/create")
 	public String createQuarter (@ModelAttribute Quarter q) {
 		try {
@@ -61,6 +92,14 @@ public class QuarterController {
 		return "redirect:dashboard";
 	}
 	
+	/**
+	 * View update form quarter.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @return the string
+	 * @throws QuarterNotFoundException the quarter not found exception
+	 */
 	@GetMapping(path="/{id}/edit")
 	public String viewUpdateFormQuarter(@PathVariable(value = "id") Integer id,
 			Model model) throws QuarterNotFoundException {
@@ -68,6 +107,12 @@ public class QuarterController {
 		return "quarter/edit";
 	}
 	
+	/**
+	 * Update quarter.
+	 *
+	 * @param q the q
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateQuarter(@ModelAttribute Quarter q) {
 		try {
@@ -81,6 +126,12 @@ public class QuarterController {
 		return "redirect:/quarter/dashboard";
     }
 	
+	/**
+	 * Delete quarter.
+	 *
+	 * @param q the q
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteQuarter(@ModelAttribute Quarter q) {
 		quarterRepository.delete(q);

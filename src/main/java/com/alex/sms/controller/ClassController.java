@@ -21,24 +21,40 @@ import com.alex.sms.repository.RegistrationRepository;
 import com.alex.sms.repository.SchoolRepository;
 import com.alex.sms.repository.SchoolYearRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClassController.
+ */
 @Controller
 @RequestMapping(path="/class")
 public class ClassController {
+	
+	/** The class repository. */
 	@Autowired
 	private ClassRepository classRepository;
 	
+	/** The school year repository. */
 	@Autowired
 	private SchoolYearRepository schoolYearRepository;
 	
+	/** The school repository. */
 	@Autowired
 	private SchoolRepository schoolRepository;
 	
+	/** The level repository. */
 	@Autowired
 	private LevelRepository levelRepository;
 
+	/** The registration repository. */
 	@Autowired
 	private RegistrationRepository registrationRepository;
 	
+	/**
+	 * Class index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String classIndex(Model model) {
         model.addAttribute("class", new Class());
@@ -49,6 +65,14 @@ public class ClassController {
         return "class/dashboard";
     }
 	
+	/**
+	 * Gets the class.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @return the class
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public String getClass (@PathVariable(value = "id") Integer id, Model model)
 			throws ClassNotFoundException {
@@ -59,11 +83,24 @@ public class ClassController {
 		return "class/view";
 	}
 	
+	/**
+	 * Gets all classes.
+	 *
+	 * @return all classes
+	 */
 	@GetMapping(path="/all")
-	public @ResponseBody Iterable<Class> getAllClasss() {
+	public @ResponseBody Iterable<Class> getAllClasses() {
 		return classRepository.findAll();
 	}
 	
+	/**
+	 * Search class.
+	 *
+	 * @param q the q
+	 * @param model the model
+	 * @return the string
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	@GetMapping(path="/search")
 	public String searchClass (@RequestParam(value = "search", required = false) String q, Model model)
 			throws ClassNotFoundException {
@@ -72,12 +109,26 @@ public class ClassController {
 		return "class/result";
 	}
 
+    /**
+     * Creates the class.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createClass(@ModelAttribute Class s) {
 		classRepository.save(s);
         return "redirect:dashboard";
     }
     
+    /**
+     * View update form class.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws ClassNotFoundException the class not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormClass(@PathVariable(value = "id") Integer id,
 			Model model) throws ClassNotFoundException {
@@ -90,12 +141,24 @@ public class ClassController {
 		return "class/edit";
 	}
 	
+	/**
+	 * Update class.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateClass(@ModelAttribute Class s) {
 		classRepository.save(s);
 		return "redirect:/class/dashboard";
     }
 	
+	/**
+	 * Delete class.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteClass(@ModelAttribute Class s) {
 		classRepository.delete(s);

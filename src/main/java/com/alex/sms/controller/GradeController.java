@@ -17,15 +17,28 @@ import com.alex.sms.model.Grade;
 import com.alex.sms.repository.ReportCardDetailRepository;
 import com.alex.sms.repository.GradeRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GradeController.
+ */
 @Controller
 @RequestMapping(path="/grade")
 public class GradeController {
+	
+	/** The grade repository. */
 	@Autowired
 	private GradeRepository gradeRepository;
 	
+	/** The report card detail repository. */
 	@Autowired
 	private ReportCardDetailRepository reportCardDetailRepository;
 	
+	/**
+	 * Grade index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String gradeIndex(Model model) {
         model.addAttribute("grade", new Grade());
@@ -34,6 +47,13 @@ public class GradeController {
         return "grade/dashboard";
     }
 	
+	/**
+	 * Gets the grade.
+	 *
+	 * @param id the id
+	 * @return the grade
+	 * @throws GradeNotFoundException the grade not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public @ResponseBody Grade getGrade (@PathVariable(value = "id") Integer id)
 			throws GradeNotFoundException {
@@ -42,17 +62,36 @@ public class GradeController {
 		return s;
 	}
 	
+	/**
+	 * Gets the all grades.
+	 *
+	 * @return the all grades
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Grade> getAllGrades() {
 		return gradeRepository.findAll();
 	}
 
+    /**
+     * Creates the grade.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createGrade(@ModelAttribute Grade s) {
 		gradeRepository.save(s);
         return "redirect:/grade/dashboard";
     }
     
+    /**
+     * View update form grade.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws GradeNotFoundException the grade not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormGrade(@PathVariable(value = "id") Integer id,
 			Model model) throws GradeNotFoundException {
@@ -61,12 +100,24 @@ public class GradeController {
 		return "grade/edit";
 	}
 	
+	/**
+	 * Update grade.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateGrade(@ModelAttribute Grade s) {
 		gradeRepository.save(s);
 		return "redirect:/grade/dashboard";
     }
 	
+	/**
+	 * Delete grade.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteGrade(@ModelAttribute Grade s) {
 		gradeRepository.delete(s);

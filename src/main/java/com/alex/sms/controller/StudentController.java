@@ -29,24 +29,40 @@ import com.alex.sms.repository.ReportCardDetailRepository;
 import com.alex.sms.repository.ReportCardRepository;
 import com.alex.sms.repository.StudentRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StudentController.
+ */
 @Controller
 @RequestMapping(path="/student")
 public class StudentController {
+	
+	/** The student repository. */
 	@Autowired
 	private StudentRepository studentRepository;
 
+	/** The registration repository. */
 	@Autowired
 	private RegistrationRepository registrationRepository;
 
+	/** The report card repository. */
 	@Autowired
 	private ReportCardRepository reportCardRepository;
 
+	/** The report card detail repository. */
 	@Autowired
 	private ReportCardDetailRepository reportCardDetailRepository;
 
+	/** The grade repository. */
 	@Autowired
 	private GradeRepository gradeRepository;
 	
+	/**
+	 * Student index.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/dashboard")
     public String studentIndex(Model model) {
         model.addAttribute("student", new Student());
@@ -54,6 +70,14 @@ public class StudentController {
         return "student/dashboard";
     }
 	
+	/**
+	 * Gets the student.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @return the student
+	 * @throws StudentNotFoundException the student not found exception
+	 */
 	@GetMapping(path="/{id}")
 	public String getStudent (@PathVariable(value = "id") Integer id, Model model)
 			throws StudentNotFoundException {
@@ -81,11 +105,24 @@ public class StudentController {
 		return "student/view";
 	}
 	
+	/**
+	 * Gets the all students.
+	 *
+	 * @return the all students
+	 */
 	@GetMapping(path="/all")
 	public @ResponseBody Iterable<Student> getAllStudents() {
 		return studentRepository.findAll();
 	}
 	
+	/**
+	 * Search student.
+	 *
+	 * @param q the q
+	 * @param model the model
+	 * @return the string
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	@GetMapping(path="/search")
 	public String searchStudent (@RequestParam(value = "search", required = false) String q, Model model)
 			throws ClassNotFoundException {
@@ -94,12 +131,26 @@ public class StudentController {
 		return "student/result";
 	}
 
+    /**
+     * Creates the student.
+     *
+     * @param s the s
+     * @return the string
+     */
     @PostMapping("/create")
     public String createStudent(@ModelAttribute Student s) {
 		studentRepository.save(s);
         return "redirect:dashboard";
     }
     
+    /**
+     * View update form student.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     * @throws StudentNotFoundException the student not found exception
+     */
     @GetMapping(path="/{id}/edit")
 	public String viewUpdateFormStudent(@PathVariable(value = "id") Integer id,
 			Model model) throws StudentNotFoundException {
@@ -109,18 +160,36 @@ public class StudentController {
 		return "student/edit";
 	}
 	
+	/**
+	 * Update student.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@PutMapping("/{id}/update")
     public String updateStudent(@ModelAttribute Student s) {
 		studentRepository.save(s);
 		return "redirect:/student/dashboard";
     }
 	
+	/**
+	 * Delete student.
+	 *
+	 * @param s the s
+	 * @return the string
+	 */
 	@DeleteMapping("/delete")
     public String deleteStudent(@ModelAttribute Student s) {
 		studentRepository.delete(s);
         return "redirect:dashboard";
     }
 	
+	/**
+	 * Find means.
+	 *
+	 * @param q the q
+	 * @return the list
+	 */
 	public List<Double> findMeans(Iterable<ReportCardDetail> q) {
 		List<ReportCardDetail> list = (List<ReportCardDetail>) q;
 		List<Grade> grades = new ArrayList<Grade>();
@@ -146,6 +215,12 @@ public class StudentController {
 		return means;
 	}
 	
+	/**
+	 * Sum.
+	 *
+	 * @param list the list
+	 * @return the double
+	 */
 	public static Double sum(List<Double> list) {
 		Double sum = 0.0;
 		for(int i = 0; i < list.size(); ++i) {

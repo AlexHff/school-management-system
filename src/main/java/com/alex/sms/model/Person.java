@@ -6,29 +6,39 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Person.
+ */
 @MappedSuperclass
 public class Person {
+	
+	/** The id. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
+	/** The name. */
 	@NotNull
 	private String name;
 
+	/** The forename. */
 	@NotNull
 	private String forename;
 
 	/**
-	 * 
+	 * Instantiates a new person.
 	 */
 	public Person() {
 		super();
 	}
 
 	/**
-	 * @param id
-	 * @param name
-	 * @param forename
+	 * Instantiates a new person.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param forename the forename
 	 */
 	public Person(Integer id, String name, String forename) {
 		super();
@@ -38,6 +48,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -45,6 +57,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -52,6 +66,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -59,6 +75,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the name.
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -66,6 +84,8 @@ public class Person {
 	}
 
 	/**
+	 * Gets the forename.
+	 *
 	 * @return the forename
 	 */
 	public String getForename() {
@@ -73,6 +93,8 @@ public class Person {
 	}
 
 	/**
+	 * Sets the forename.
+	 *
 	 * @param forename the forename to set
 	 */
 	public void setForename(String forename) {
