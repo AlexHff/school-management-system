@@ -90,4 +90,9 @@ public class ViewsController {
 	public String error404() {
 		return "error/404";
 	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 }
